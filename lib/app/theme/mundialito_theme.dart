@@ -28,6 +28,25 @@ class MundialitoTheme {
           borderRadius: BorderRadius.circular(5.0),
           borderSide: BorderSide(color: _chameleon),
         ),
+        iconColor: _chameleon,
+      ),
+      toggleButtonsTheme: ToggleButtonsThemeData(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        fillColor: _chameleon,
+        color: _white,
+        selectedBorderColor: _chameleon,
+        borderColor: _inputTextFill
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: _chameleon,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            textStyle: TextStyle(
+              color: _white,
+            ),
+        )
       ),
       textTheme: TextTheme(
         headline1: GoogleFonts.roboto(
@@ -42,10 +61,29 @@ class MundialitoTheme {
               fontSize: 36.0,
             )
         ),
+        headline3: GoogleFonts.roboto(
+          textStyle: TextStyle(
+            color: _white,
+            fontSize: 18,
+          )
+        ),
+        headline4: GoogleFonts.roboto(
+          textStyle: TextStyle(
+            color: _white,
+            fontSize: 16,
+            fontWeight: FontWeight.w200
+          )
+        ),
         bodyText1: GoogleFonts.roboto(
           textStyle: TextStyle(
             color: _shadowStriker,
             fontSize: 16.0
+          )
+        ),
+        bodyText2: GoogleFonts.roboto(
+          textStyle: TextStyle(
+            color: _white,
+            fontSize: 20.0
           )
         ),
         button: GoogleFonts.roboto(textStyle: TextStyle(color: _white)),

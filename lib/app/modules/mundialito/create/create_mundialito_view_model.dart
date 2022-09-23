@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mundialito/app/models/mundialito.dart';
 import 'package:mundialito/app/utils/date_time_utils.dart';
@@ -79,6 +80,7 @@ abstract class _CreateMundialitoViewModelBase with Store {
     print(mundialito.startDate);
     print(mundialito.endDate);
     print(mundialito.contenders);
+    Modular.to.pushNamed('/tournament/');
   }
 
   Mundialito makeMundialitoFromInput() {

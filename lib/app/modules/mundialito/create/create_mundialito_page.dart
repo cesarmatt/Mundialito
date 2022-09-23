@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mundialito/app/modules/mundialito/create/create_mundialito_view_model.dart';
-import 'package:mundialito/app/modules/mundialito/widgets/contenders_list/contenders_list_widget.dart';
+import 'package:mundialito/app/modules/mundialito/create/widgets/contenders_list/contenders_list_widget.dart';
 import 'package:mundialito/app/shared/widgets/buttons/primary_button_widget.dart';
 import 'package:mundialito/app/shared/widgets/input/date_picker_input_widget.dart';
 import 'package:mundialito/app/shared/widgets/input/input_text_with_action_button_widget.dart';
@@ -12,7 +12,7 @@ import 'package:mundialito/app/shared/widgets/text/form_title_with_subtitle_widg
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mundialito/app/theme/mundialito_theme.dart';
 import '../../../models/contender/contender.dart';
-import '../data/date_input_target.dart';
+import 'data/date_input_target.dart';
 
 
 class CreateMundialitoPage extends StatefulWidget {

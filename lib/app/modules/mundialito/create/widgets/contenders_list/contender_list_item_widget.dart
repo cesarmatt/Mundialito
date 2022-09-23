@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../models/contender/contender.dart';
+import 'package:mundialito/app/models/contender/contender.dart';
 
 class ContenderListItemWidget extends StatelessWidget {
   const ContenderListItemWidget(

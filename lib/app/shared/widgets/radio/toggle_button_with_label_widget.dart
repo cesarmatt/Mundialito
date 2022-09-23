@@ -34,7 +34,7 @@ class ToggleButtonWithLabelState extends State<ToggleButtonWithLabelWidget> {
             style: textTheme.headline3?.copyWith(),
           ),
         ),
-        const SizedBox(width: 60,),
+        const Spacer(),
         ToggleButtons(
             onPressed: (int index) {
               setState(() {

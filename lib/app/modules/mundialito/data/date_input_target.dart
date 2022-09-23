@@ -1,0 +1,3 @@
+enum DateInputTarget {
+  startDate, endDate
+}

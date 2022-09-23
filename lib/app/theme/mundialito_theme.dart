@@ -12,6 +12,17 @@ class MundialitoTheme {
   static Color _white = Color(0xFFF2F2F2);
   static Color _inputTextFill = Color(0xFFC5C5C5);
 
+  static Color getPrimaryColor() {
+    return _chameleon;
+  }
+
+  static Color getOnPrimaryColor() {
+    return _white;
+  }
+
+  static Color getOnSurfaceColor() {
+    return _great;
+  }
 
   static ThemeData buildTheme(BuildContext) {
     return ThemeData(
@@ -87,7 +98,11 @@ class MundialitoTheme {
           )
         ),
         button: GoogleFonts.roboto(textStyle: TextStyle(color: _white)),
-      )
+      ),
+      appBarTheme: AppBarTheme(
+        color: _background,
+        elevation: 0
+      ),
     );
   }
 }

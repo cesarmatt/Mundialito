@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mundialito/app/models/mundialito.dart';
-import '../../models/contender/contender.dart';
-part 'mundialito_view_model.g.dart';
+import 'package:mundialito/app/utils/date_time_utils.dart';
+import '../../../models/contender/contender.dart';
 
-class MundialitoViewModel = _MundialitoViewModelBase with _$MundialitoViewModel;
+part 'create_mundialito_view_model.g.dart';
 
-abstract class _MundialitoViewModelBase with Store {
+class CreateMundialitoViewModel = _CreateMundialitoViewModelBase
+    with _$CreateMundialitoViewModel;
 
+abstract class _CreateMundialitoViewModelBase with Store {
   final mundialitoNameTextEditingController = TextEditingController();
   final mundialitoStartDateTextEditingController = TextEditingController();
   final mundialitoEndDateTextEditingController = TextEditingController();
@@ -22,18 +24,15 @@ abstract class _MundialitoViewModelBase with Store {
   @observable
   List<Contender> contendersList = [];
 
+  @observable
+  DateTime? startDate;
+
+  @observable
+  DateTime? endDate;
 
   @action
   void onMundialitoEndDateDefined(bool mundialitoHasEndDate) {
     hasEndDate = mundialitoHasEndDate;
-  }
-
-  bool mundialitoHasEndDate() {
-    if (mundialitoEndDateToggle[0] == true) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   @action
@@ -49,6 +48,31 @@ abstract class _MundialitoViewModelBase with Store {
     contendersList.remove(toDeleteContender);
   }
 
+  @action
+  void onStartDateSelected(DateTime? selectedDate) {
+    if (selectedDate != null) {
+      mundialitoStartDateTextEditingController.text =
+          DateTimeUtils.formatDDmmYY(selectedDate);
+    }
+  }
+
+  @action
+  void onEndDateSelected(DateTime? selectedDate) {
+    if (selectedDate != null) {
+      mundialitoEndDateTextEditingController.text =
+          DateTimeUtils.formatDDmmYY(selectedDate);
+    }
+  }
+
+  bool mundialitoHasEndDate() {
+    if (mundialitoEndDateToggle[0] == true) {
+      mundialitoEndDateTextEditingController.text = "";
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void onStartMundialitoClicked() {
     var mundialito = makeMundialitoFromInput();
     print(mundialito.name);
@@ -62,7 +86,6 @@ abstract class _MundialitoViewModelBase with Store {
         mundialitoNameTextEditingController.text,
         mundialitoStartDateTextEditingController.text,
         mundialitoEndDateTextEditingController.text,
-        contendersList
-    );
+        contendersList);
   }
 }

@@ -103,6 +103,11 @@ class MundialitoTheme {
         color: _background,
         elevation: 0
       ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        selectedItemColor: _white,
+        backgroundColor: _chameleon,
+        unselectedItemColor: _great,
+      )
     );
   }
 }

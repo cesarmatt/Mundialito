@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mundialito/app/models/mundialito.dart';
+import 'package:mundialito/app/models/match/match_factory.dart';
+import 'package:mundialito/app/models/mundialito/mundialito.dart';
 import 'package:mundialito/app/utils/date_time_utils.dart';
 import '../../../models/contender/contender.dart';
+import 'package:mundialito/app/models/match/match.dart';
 
 part 'create_mundialito_view_model.g.dart';
 
@@ -30,6 +32,9 @@ abstract class _CreateMundialitoViewModelBase with Store {
 
   @observable
   DateTime? endDate;
+
+  @observable
+  bool error = false;
 
   @action
   void onMundialitoEndDateDefined(bool mundialitoHasEndDate) {
@@ -76,18 +81,28 @@ abstract class _CreateMundialitoViewModelBase with Store {
 
   void onStartMundialitoClicked() {
     var mundialito = makeMundialitoFromInput();
-    print(mundialito.name);
-    print(mundialito.startDate);
-    print(mundialito.endDate);
-    print(mundialito.contenders);
-    Modular.to.pushNamed('/tournament/');
+    if (mundialito != null) {
+      Modular.to.popAndPushNamed('/tournament/');
+    } else {
+      error = true;
+    }
   }
 
-  Mundialito makeMundialitoFromInput() {
-    return Mundialito(
-        mundialitoNameTextEditingController.text,
-        mundialitoStartDateTextEditingController.text,
-        mundialitoEndDateTextEditingController.text,
-        contendersList);
+  Mundialito? makeMundialitoFromInput() {
+    Contender owner = Contender("owner");
+    MatchFactory matchFactory = MatchFactory();
+    List<Match> matches = matchFactory.shuffledFromContenderList(contendersList);
+    if (matches.isNotEmpty) {
+      return Mundialito(
+          mundialitoNameTextEditingController.text,
+          mundialitoStartDateTextEditingController.text,
+          mundialitoEndDateTextEditingController.text,
+          contendersList,
+          owner,
+          matches
+      );
+    } else {
+      return null;
+    }
   }
 }

@@ -107,6 +107,9 @@ class MundialitoTheme {
         selectedItemColor: _white,
         backgroundColor: _chameleon,
         unselectedItemColor: _great,
+      ),
+      iconTheme: IconThemeData(
+        color: _chameleon
       )
     );
   }

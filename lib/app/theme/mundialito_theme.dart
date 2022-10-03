@@ -85,6 +85,12 @@ class MundialitoTheme {
             fontWeight: FontWeight.w200
           )
         ),
+        headline5: GoogleFonts.roboto(
+            textStyle: TextStyle(
+              color: _white,
+              fontSize: 28,
+            )
+        ),
         bodyText1: GoogleFonts.roboto(
           textStyle: TextStyle(
             color: _shadowStriker,
@@ -98,6 +104,12 @@ class MundialitoTheme {
           )
         ),
         button: GoogleFonts.roboto(textStyle: TextStyle(color: _white)),
+        caption: GoogleFonts.roboto(
+          textStyle: TextStyle(
+            color: _chameleon,
+            fontSize: 16
+          )
+        )
       ),
       appBarTheme: AppBarTheme(
         color: _background,

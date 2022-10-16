@@ -91,7 +91,6 @@ class LoginPageState extends State<LoginPage> {
 
   void _makeSnackBar() async {
     if (viewModel.loginStatus == LoginStatus.success) {
-      await _showSnackBar(makeSuccessSnackBar("Login successful!"));
       _goToHome();
     } else if (viewModel.loginStatus == LoginStatus.failed) {
       await _showSnackBar(makeErrorSnackBar("Something went wrong."));

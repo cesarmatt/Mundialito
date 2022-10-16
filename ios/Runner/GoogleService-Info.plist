@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>860217366220-lh0iqllo8dft7k5ekm25igginjvlr9f7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.860217366220-lh0iqllo8dft7k5ekm25igginjvlr9f7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCIu0LhpxtdBEJl7K9CSoWrmTHgZdi2E4I</string>
+	<key>GCM_SENDER_ID</key>
+	<string>860217366220</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.cesarmatt.mundialito.mundialito</string>
+	<key>PROJECT_ID</key>
+	<string>mundialito-934d3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mundialito-934d3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:860217366220:ios:5186d28d8dc746dfbc9469</string>
+</dict>
+</plist>

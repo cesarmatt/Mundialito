@@ -122,7 +122,7 @@ class MundialitoTheme {
       ),
       iconTheme: IconThemeData(
         color: _chameleon
-      )
+      ),
     );
   }
 }

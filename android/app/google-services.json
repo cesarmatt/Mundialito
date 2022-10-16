@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1031757303390",
+    "project_id": "mundialito-6c1a4",
+    "storage_bucket": "mundialito-6c1a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031757303390:android:6712c7d2dafbb765892ecf",
+        "android_client_info": {
+          "package_name": "com.cesarmatt.mundialito.mundialito"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031757303390-lone0ifokphkkagjsaoqlaqbubd18rsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1xFFa62mggwb7BUDLnBFDva_8LyJpv4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031757303390-lone0ifokphkkagjsaoqlaqbubd18rsj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1031757303390-lh7jdmogt3ruv7am4bv70cauv3i9h6j8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cesarmatt.mundialito.mundialito"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

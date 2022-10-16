@@ -7,19 +7,23 @@ class PrimaryButtonWidget extends StatelessWidget {
       required this.onPressed,
       required this.label,
       this.width,
-      this.height})
+      this.height,
+      this.horizontalPadding,
+      this.verticalPadding})
       : super(key: key);
 
   final void Function() onPressed;
   final String label;
   final double? width;
   final double? height;
+  final double? horizontalPadding;
+  final double? verticalPadding;
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 16, vertical: verticalPadding ?? 8),
       child: SizedBox(
         width: width ?? double.infinity,
         height: height ?? 50,

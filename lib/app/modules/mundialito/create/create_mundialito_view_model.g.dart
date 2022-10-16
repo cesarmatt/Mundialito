@@ -91,6 +91,22 @@ mixin _$CreateMundialitoViewModel on _CreateMundialitoViewModelBase, Store {
     });
   }
 
+  late final _$errorAtom =
+      Atom(name: '_CreateMundialitoViewModelBase.error', context: context);
+
+  @override
+  bool get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(bool value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
   late final _$_CreateMundialitoViewModelBaseActionController =
       ActionController(
           name: '_CreateMundialitoViewModelBase', context: context);
@@ -161,7 +177,8 @@ hasEndDate: ${hasEndDate},
 mundialitoEndDateToggle: ${mundialitoEndDateToggle},
 contendersList: ${contendersList},
 startDate: ${startDate},
-endDate: ${endDate}
+endDate: ${endDate},
+error: ${error}
     ''';
   }
 }

@@ -18,7 +18,9 @@ dependencies:
   build_runner: ^2.2.0
   flutter_mobx: ^2.0.2
   intl: ^0.17.0
-  shared_preferences: ^2.0.15
+  mocktail: ^0.3.0
+  firebase_core: ^1.20.1
+  firebase_auth: ^3.11.2
 
 dev_dependencies:
   flutter_test:

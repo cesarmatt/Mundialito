@@ -27,7 +27,14 @@ class OnboardingPageState extends State<OnboardingPage> {
                   _onStartMundialitoPressed();
                 },
                 icon: const Icon(Icons.fiber_new_rounded),
-                label: "Start new Mundialito")
+                label: "Start new Mundialito"),
+            const SizedBox(height: 12),
+            ButtonWithIconWidget(
+                onPressed: () {
+                  _onLoginPressed();
+                },
+                icon: const Icon(Icons.login),
+                label: "Login")
           ],
         ),
       ),
@@ -36,5 +43,9 @@ class OnboardingPageState extends State<OnboardingPage> {
 
   void _onStartMundialitoPressed() {
     Modular.to.pushNamed('/mundialito/');
+  }
+
+  void _onLoginPressed() {
+    Modular.to.pushNamed('/login/');
   }
 }

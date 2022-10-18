@@ -21,7 +21,13 @@ class MatchFactory {
       contenders.remove(contenderH);
       var contenderA = _getRandomContender(contenders);
       contenders.remove(contenderA);
-      Match toCreateMatch = Match(contenderH, contenderA, 0, 0, false);
+      Match toCreateMatch = Match(
+          contenderH: contenderH,
+          contenderA: contenderA,
+          scoreContenderH: 0,
+          scoreContenderA: 0,
+          isFinished: false
+      );
       matches.add(toCreateMatch);
     }
 

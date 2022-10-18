@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -44,7 +45,7 @@ abstract class _CreateMundialitoViewModelBase with Store {
   @action
   void onAddContenderClicked() {
     var contenderName = contenderNameTextEditingController.text;
-    var contender = Contender(contenderName);
+    var contender = Contender(name: contenderName);
     contendersList.add(contender);
     contenderNameTextEditingController.text = "";
   }
@@ -57,6 +58,7 @@ abstract class _CreateMundialitoViewModelBase with Store {
   @action
   void onStartDateSelected(DateTime? selectedDate) {
     if (selectedDate != null) {
+      startDate = selectedDate;
       mundialitoStartDateTextEditingController.text =
           DateTimeUtils.formatDDmmYY(selectedDate);
     }
@@ -65,6 +67,7 @@ abstract class _CreateMundialitoViewModelBase with Store {
   @action
   void onEndDateSelected(DateTime? selectedDate) {
     if (selectedDate != null) {
+      endDate = selectedDate;
       mundialitoEndDateTextEditingController.text =
           DateTimeUtils.formatDDmmYY(selectedDate);
     }
@@ -89,18 +92,23 @@ abstract class _CreateMundialitoViewModelBase with Store {
   }
 
   Mundialito? makeMundialitoFromInput() {
-    Contender owner = Contender("owner");
+    Contender owner = Contender(name: "owner");
     MatchFactory matchFactory = MatchFactory();
-    List<Match> matches = matchFactory.shuffledFromContenderList(contendersList);
+    Timestamp mundialitoStartDate =
+        Timestamp.fromDate(startDate ?? DateTime.now());
+    Timestamp mundialitoEndDate =
+        Timestamp.fromDate(startDate ?? DateTime.now());
+    List<Match> matches =
+        matchFactory.shuffledFromContenderList(contendersList);
     if (matches.isNotEmpty) {
       return Mundialito(
-          mundialitoNameTextEditingController.text,
-          mundialitoStartDateTextEditingController.text,
-          mundialitoEndDateTextEditingController.text,
-          contendersList,
-          owner,
-          matches
-      );
+          name: mundialitoNameTextEditingController.text,
+          startDate: mundialitoStartDate,
+          endDate: mundialitoEndDate,
+          contenders: contendersList,
+          owner: owner,
+          matches: matches,
+          isCompleted: false);
     } else {
       return null;
     }

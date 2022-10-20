@@ -161,7 +161,7 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
                         ),
                         ContendersListWidget(
                             contenders: viewModel.contendersList,
-                            onItemDeleted: (Contender? contender) {
+                            onItemDeleted: (String? contender) {
                               setState(() {
                                 viewModel.onDeleteContenderClicked(contender);
                               });

@@ -7,8 +7,8 @@ class ContendersListWidget extends StatelessWidget {
       {Key? key, required this.contenders, required this.onItemDeleted})
       : super(key: key);
 
-  final List<Contender>? contenders;
-  final void Function(Contender?) onItemDeleted;
+  final List<String>? contenders;
+  final void Function(String?) onItemDeleted;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ContendersListWidget extends StatelessWidget {
             var contender = contenders?[index];
             return ContenderListItemWidget(
               contender: contender,
-              onDeleteClicked: (Contender? contender) {
+              onDeleteClicked: (String? contender) {
                 onItemDeleted(contender);
               },
             );

@@ -1,16 +1,17 @@
 import 'dart:math';
 import 'package:mundialito/app/models/contender/contender.dart';
 import 'package:mundialito/app/models/match/match.dart';
+import 'package:mundialito/app/models/match/match_firebase_object.dart';
 
 class MatchFactory {
 
-  List<Match> shuffledFromContenderList(List<Contender> contenders) {
-    List<Match> matches = _getShuffledList(contenders);
+  List<MatchFirebaseObject> shuffledFromContenderList(List<String> contenders) {
+    List<MatchFirebaseObject> matches = _getShuffledList(contenders);
     return matches;
   }
 
-  List<Match> _getShuffledList(List<Contender> contenders) {
-    List<Match> matches = [];
+  List<MatchFirebaseObject> _getShuffledList(List<String> contenders) {
+    List<MatchFirebaseObject> matches = [];
 
     if (contenders.length % 2 > 0) {
       return [];
@@ -21,7 +22,7 @@ class MatchFactory {
       contenders.remove(contenderH);
       var contenderA = _getRandomContender(contenders);
       contenders.remove(contenderA);
-      Match toCreateMatch = Match(
+      MatchFirebaseObject toCreateMatch = MatchFirebaseObject(
           contenderH: contenderH,
           contenderA: contenderA,
           scoreContenderH: 0,
@@ -34,7 +35,7 @@ class MatchFactory {
     return matches.toSet().toList();
   }
 
-  Contender _getRandomContender(List<Contender> contenders) {
+  String _getRandomContender(List<String> contenders) {
     var randomIndex = Random().nextInt(contenders.length);
     return contenders[randomIndex];
   }

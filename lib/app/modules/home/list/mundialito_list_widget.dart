@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mundialito/app/modules/home/list/mundialito_home_list_item_widget.dart';
-import '../../../models/mundialito/mundialito_home_view_object.dart';
+import '../../../models/mundialito/mundialito_firebase_object.dart';
 
 class MundialitoListWidget extends StatelessWidget {
   const MundialitoListWidget(
@@ -8,7 +8,7 @@ class MundialitoListWidget extends StatelessWidget {
       : super(key: key);
 
   final void Function(String) onItemPressed;
-  final List<MundialitoHomeViewObject> mundialitos;
+  final List<MundialitoFirebaseObject> mundialitos;
 
   @override
   Widget build(BuildContext context) {

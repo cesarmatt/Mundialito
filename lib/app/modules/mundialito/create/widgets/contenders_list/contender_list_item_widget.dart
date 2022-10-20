@@ -7,8 +7,8 @@ class ContenderListItemWidget extends StatelessWidget {
       {Key? key, required this.contender, required this.onDeleteClicked})
       : super(key: key);
 
-  final Contender? contender;
-  final Function(Contender?) onDeleteClicked;
+  final String? contender;
+  final Function(String?) onDeleteClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ContenderListItemWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(contender?.name ?? ""),
+                Text(contender ?? ""),
                 const Spacer(),
                 IconButton(
                     onPressed: () {

@@ -45,13 +45,13 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
       Atom(name: '_HomeViewModelBase.mundialitos', context: context);
 
   @override
-  List<MundialitoHomeViewObject> get mundialitos {
+  List<MundialitoFirebaseObject> get mundialitos {
     _$mundialitosAtom.reportRead();
     return super.mundialitos;
   }
 
   @override
-  set mundialitos(List<MundialitoHomeViewObject> value) {
+  set mundialitos(List<MundialitoFirebaseObject> value) {
     _$mundialitosAtom.reportWrite(value, super.mundialitos, () {
       super.mundialitos = value;
     });

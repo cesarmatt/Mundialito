@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mundialito/app/utils/date_time_utils.dart';
 
-class MundialitoHomeViewObject {
-  MundialitoHomeViewObject(
+class MundialitoFirebaseObject {
+  MundialitoFirebaseObject(
       {required this.name,
       required this.startDate,
       this.endDate,
@@ -24,7 +24,7 @@ class MundialitoHomeViewObject {
     return DateTimeUtils.formatDDmmYY(timestampAsDate);
   }
 
-  MundialitoHomeViewObject.fromJson(Map<String, Object?> json)
+  MundialitoFirebaseObject.fromJson(Map<String, Object?> json)
       : this(
       name: json['name']! as String,
       startDate: json['startDate']! as Timestamp,

@@ -5,7 +5,7 @@ import 'package:mundialito/app/models/match/match_factory.dart';
 
 void main() {
   late final MatchFactory sut;
-  final contenderMock = Contender(name: "Contender");
+  final contenderMock = "Contender";
 
   setUpAll(() {
     sut = MatchFactory();

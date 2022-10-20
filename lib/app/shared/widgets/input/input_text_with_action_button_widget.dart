@@ -33,9 +33,7 @@ class InputTextWithActionButtonWidget extends StatelessWidget {
               hintText: hint,
               suffixIcon: IconButton(
                 icon: icon,
-                onPressed: () {
-                  onPressed();
-                },
+                onPressed: onPressed,
               )
           ),
         )

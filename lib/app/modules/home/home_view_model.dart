@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:mundialito/app/firebase/onboarding/home/home_repository.dart';
 import 'package:mundialito/app/models/mundialito/mundialito.dart';
-import 'package:mundialito/app/models/mundialito/mundialito_home_view_object.dart';
+import 'package:mundialito/app/models/mundialito/mundialito_firebase_object.dart';
 
 part 'home_view_model.g.dart';
 
@@ -18,7 +18,7 @@ abstract class _HomeViewModelBase with Store {
   bool isError = false;
 
   @observable
-  List<MundialitoHomeViewObject> mundialitos = [];
+  List<MundialitoFirebaseObject> mundialitos = [];
 
   @action
   Future<void> getMundialitos() async {

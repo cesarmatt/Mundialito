@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mundialito/app/models/mundialito/mundialito_home_view_object.dart';
+import 'package:mundialito/app/models/mundialito/mundialito_firebase_object.dart';
 
 class MundialitoHomeListItemWidget extends StatelessWidget {
   const MundialitoHomeListItemWidget(
       {Key? key, required this.mundialito, required this.onItemPressed})
       : super(key: key);
 
-  final MundialitoHomeViewObject mundialito;
+  final MundialitoFirebaseObject mundialito;
   final Function(String) onItemPressed;
 
   @override
@@ -61,7 +61,7 @@ class MundialitoHomeListItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            MundialitoHomeViewObject.getFormattedDate(mundialito.startDate),
+            MundialitoFirebaseObject.getFormattedDate(mundialito.startDate),
             style: textTheme.caption?.copyWith(color: Colors.white),
           )
         ]);
@@ -76,7 +76,7 @@ class MundialitoHomeListItemWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          MundialitoHomeViewObject.getFormattedDate(mundialito.startDate),
+          MundialitoFirebaseObject.getFormattedDate(mundialito.startDate),
           style: textTheme.caption?.copyWith(color: Colors.white),
         ),
         Text(
@@ -84,7 +84,7 @@ class MundialitoHomeListItemWidget extends StatelessWidget {
           style: textTheme.caption?.copyWith(color: Colors.white),
         ),
         Text(
-          MundialitoHomeViewObject.getFormattedDate(mundialito.endDate),
+          MundialitoFirebaseObject.getFormattedDate(mundialito.endDate),
           style: textTheme.caption?.copyWith(color: Colors.white),
         ),
       ],

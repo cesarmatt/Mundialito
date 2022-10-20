@@ -47,13 +47,13 @@ mixin _$CreateMundialitoViewModel on _CreateMundialitoViewModelBase, Store {
       name: '_CreateMundialitoViewModelBase.contendersList', context: context);
 
   @override
-  List<Contender> get contendersList {
+  ObservableList<String> get contendersList {
     _$contendersListAtom.reportRead();
     return super.contendersList;
   }
 
   @override
-  set contendersList(List<Contender> value) {
+  set contendersList(ObservableList<String> value) {
     _$contendersListAtom.reportWrite(value, super.contendersList, () {
       super.contendersList = value;
     });
@@ -136,7 +136,7 @@ mixin _$CreateMundialitoViewModel on _CreateMundialitoViewModelBase, Store {
   }
 
   @override
-  void onDeleteContenderClicked(Contender? toDeleteContender) {
+  void onDeleteContenderClicked(String? toDeleteContender) {
     final _$actionInfo =
         _$_CreateMundialitoViewModelBaseActionController.startAction(
             name: '_CreateMundialitoViewModelBase.onDeleteContenderClicked');

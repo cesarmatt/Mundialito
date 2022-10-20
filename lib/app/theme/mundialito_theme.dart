@@ -123,6 +123,13 @@ class MundialitoTheme {
       iconTheme: IconThemeData(
         color: _chameleon
       ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: _chameleon
+      ),
+      cardColor: _great,
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: _chameleon
+      )
     );
   }
 }

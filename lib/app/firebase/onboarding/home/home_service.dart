@@ -1,5 +1,5 @@
-import 'package:mundialito/app/models/mundialito/mundialito.dart';
+import 'package:mundialito/app/models/mundialito/mundialito_home_view_object.dart';
 
 abstract class HomeService {
-  Future<List<Mundialito>?> getMundialitos();
+  Future<List<MundialitoHomeViewObject>?> getMundialitos();
 }

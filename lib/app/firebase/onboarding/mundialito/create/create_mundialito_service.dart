@@ -3,6 +3,6 @@ import 'package:mundialito/app/models/match/match_firebase_object.dart';
 import 'package:mundialito/app/models/mundialito/mundialito_firebase_object.dart';
 
 abstract class CreateMundialitoService {
-  Future<bool> createMundialito(MundialitoFirebaseObject mundialito);
+  Future<String> createMundialito(MundialitoFirebaseObject mundialito);
   Future<DocumentReference<MatchFirebaseObject>> saveMatch(MatchFirebaseObject match);
 }

@@ -92,8 +92,8 @@ abstract class _CreateMundialitoViewModelBase with Store {
     if (mundialito != null) {
       var response =
           await _createMundialitoRepository.createMundialito(mundialito);
-      if (response) {
-        Modular.to.popAndPushNamed('/tournament/');
+      if (response.isNotEmpty) {
+        Modular.to.popAndPushNamed('/tournament/$response');
       } else {
         error = true;
       }

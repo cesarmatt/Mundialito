@@ -4,8 +4,8 @@ import 'package:mundialito/app/models/mundialito/mundialito_firebase_object.dart
 class CreateMundialitoRepository {
   final CreateMundialitoRemoteDataSource _remoteDataSource = CreateMundialitoRemoteDataSource();
 
-  Future<bool> createMundialito(MundialitoFirebaseObject mundialito) async {
+  Future<String> createMundialito(MundialitoFirebaseObject mundialito) async {
     var response = await _remoteDataSource.createMundialito(mundialito);
-    return response != null;
+    return response;
   }
 }

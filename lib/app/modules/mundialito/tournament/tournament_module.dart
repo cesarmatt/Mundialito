@@ -14,11 +14,10 @@ class TournamentModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute("/", child: (_, args) => TournamentPage(), children: [
-      ModuleRoute('/matches', module: MatchesModule()),
-      ModuleRoute('/overview', module: OverviewModule()),
-      ModuleRoute('/results', module: ResultsModule()),
-    ])
+    ChildRoute("/:id", child: (_, args) => TournamentPage(mundialitoId: args.params['id'])),
+    ModuleRoute('/matches', module: MatchesModule()),
+    ModuleRoute('/overview', module: OverviewModule()),
+    ModuleRoute('/results', module: ResultsModule()),
   ];
 
 }

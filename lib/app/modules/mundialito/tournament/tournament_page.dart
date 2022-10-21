@@ -5,7 +5,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/tournament_view_model.dart';
 
 class TournamentPage extends StatefulWidget {
-  const TournamentPage({Key? key}) : super(key: key);
+  const TournamentPage({Key? key, required this.mundialitoId}) : super(key: key);
+
+  final String mundialitoId;
 
   @override
   TournamentPageState createState() => TournamentPageState();
@@ -13,6 +15,12 @@ class TournamentPage extends StatefulWidget {
 
 class TournamentPageState extends State<TournamentPage> {
   final TournamentViewModel viewModel = Modular.get();
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel.getMundialito(widget.mundialitoId);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -55,6 +55,6 @@ class HomePageState extends State<HomePage> {
   }
 
   void _onMundialitoPressed(String mundialitoId) {
-    Modular.to.pushNamed('/tournament/$mundialitoId');
+    Modular.to.pushNamed('/tournament/', arguments: mundialitoId);
   }
 }

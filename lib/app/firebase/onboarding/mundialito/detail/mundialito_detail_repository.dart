@@ -8,4 +8,5 @@ class MundialitoDetailRepository {
     var response = await _remoteDataSource.getMundialitoById(mundialitoId);
     return response;
   }
+
 }

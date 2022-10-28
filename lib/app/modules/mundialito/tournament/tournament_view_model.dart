@@ -21,16 +21,4 @@ abstract class _TournamentViewModelBase with Store {
   @observable
   Mundialito? mundialito;
 
-  @action
-  Future<void> getMundialito(String mundialitoId) async {
-    isLoading = true;
-    var response = await _repository.getMundialitoById(mundialitoId);
-    if (response != null) {
-      mundialito = response;
-      isLoading = false;
-    } else {
-      isLoading = false;
-      isError = true;
-    }
-  }
 }

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mundialito/app/firebase/onboarding/mundialito/detail/mundialito_detail_service.dart';
+import 'package:mundialito/app/models/contender/contender.dart';
 import 'package:mundialito/app/models/match/match.dart';
 import 'package:mundialito/app/models/match/match_firebase_object.dart';
 import 'package:mundialito/app/models/mundialito/mundialito.dart';
@@ -40,16 +41,21 @@ class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
     var mundialitoFirebase = snapshot.data();
     var fromFirebaseMatches = mundialitoFirebase?.matches ?? [];
     var matches = <Match>[];
+    var contenders = <Contender>[];
     for (String firebaseMatch in fromFirebaseMatches) {
       var match = await getMatchById(firebaseMatch);
       matches.add(match);
+    }
+    for (dynamic firebaseContender in mundialitoFirebase?.contenders ?? []) {
+      var contender = _makeContender(firebaseContender);
+      contenders.add(contender);
     }
     return Mundialito(
         uid: snapshot.id,
         name: mundialitoFirebase?.name ?? "",
         startDate: mundialitoFirebase?.startDate ?? Timestamp.now(),
         endDate: mundialitoFirebase?.endDate ?? Timestamp.now(),
-        contenders: mundialitoFirebase?.contenders as List<dynamic>,
+        contenders: contenders,
         owner: mundialitoFirebase?.owner ?? "",
         matches: matches,
         isCompleted: mundialitoFirebase?.isCompleted ?? false
@@ -65,5 +71,9 @@ class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
         scoreContenderH: matchFirebase?.scoreContenderH ?? 0,
         scoreContenderA: matchFirebase?.scoreContenderA ?? 0,
         isFinished: matchFirebase?.isFinished ?? false);
+  }
+
+  Contender _makeContender(dynamic contender) {
+    return Contender(name: contender);
   }
 }

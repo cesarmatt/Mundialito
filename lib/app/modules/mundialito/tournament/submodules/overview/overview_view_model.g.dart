@@ -57,6 +57,38 @@ mixin _$OverviewViewModel on _OverviewViewModelBase, Store {
     });
   }
 
+  late final _$resultsAtom =
+      Atom(name: '_OverviewViewModelBase.results', context: context);
+
+  @override
+  List<ResultForContender>? get results {
+    _$resultsAtom.reportRead();
+    return super.results;
+  }
+
+  @override
+  set results(List<ResultForContender>? value) {
+    _$resultsAtom.reportWrite(value, super.results, () {
+      super.results = value;
+    });
+  }
+
+  late final _$currentMatchAtom =
+      Atom(name: '_OverviewViewModelBase.currentMatch', context: context);
+
+  @override
+  Match? get currentMatch {
+    _$currentMatchAtom.reportRead();
+    return super.currentMatch;
+  }
+
+  @override
+  set currentMatch(Match? value) {
+    _$currentMatchAtom.reportWrite(value, super.currentMatch, () {
+      super.currentMatch = value;
+    });
+  }
+
   late final _$getMundialitoOverviewAsyncAction = AsyncAction(
       '_OverviewViewModelBase.getMundialitoOverview',
       context: context);
@@ -67,12 +99,23 @@ mixin _$OverviewViewModel on _OverviewViewModelBase, Store {
         .run(() => super.getMundialitoOverview(mundialitoId));
   }
 
+  late final _$_setCurrentMatchAsyncAction =
+      AsyncAction('_OverviewViewModelBase._setCurrentMatch', context: context);
+
+  @override
+  Future<void> _setCurrentMatch(List<Match> matches) {
+    return _$_setCurrentMatchAsyncAction
+        .run(() => super._setCurrentMatch(matches));
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 isError: ${isError},
-mundialitoOverview: ${mundialitoOverview}
+mundialitoOverview: ${mundialitoOverview},
+results: ${results},
+currentMatch: ${currentMatch}
     ''';
   }
 }

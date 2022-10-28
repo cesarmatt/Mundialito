@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mundialito/app/models/contender/contender.dart';
+import 'package:mundialito/app/models/mundialito/overview/match/current_match_widget.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/overview_view_model.dart';
+import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/widgets/table/table_widget.dart';
 import 'package:mundialito/app/shared/widgets/liststate/primary_loader_widget.dart';
 import 'package:mundialito/app/utils/date_time_utils.dart';
 
@@ -32,39 +35,58 @@ class OverviewPageState extends State<OverviewPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
       ),
-      body: Observer(
-          builder: (_) {
-            if (viewModel.isLoading) {
-              return const PrimaryLoaderWidget();
-            } else {
-              return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
+      body: Observer(builder: (_) {
+        if (viewModel.isLoading) {
+          return const PrimaryLoaderWidget();
+        } else {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(
+                    Text(
+                      viewModel.mundialitoOverview?.mundialitoTile ?? "",
+                      style: textTheme.headline1?.copyWith(),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Text(DateTimeUtils.getFormattedDate(
+                            viewModel.mundialitoOverview?.mundialitoDate)),
+                        Text(" - "),
                         Text(
-                            viewModel.mundialitoOverview?.mundialitoTile ?? "",
-                          style: textTheme.headline1?.copyWith(),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(DateTimeUtils.getFormattedDate(viewModel.mundialitoOverview?.mundialitoDate)),
-                            Text(" - "),
-                            Text("${viewModel.mundialitoOverview?.numberOfContenders.toString()} contenders" ?? ""),
-                          ],
-                        ),
+                            "${viewModel.mundialitoOverview?.contenders.length.toString()} contenders" ??
+                                ""),
                       ],
                     ),
+                    const SizedBox(height: 8),
+                    TableWidget(
+                      results: viewModel.results ?? [],
+                    ),
+                    const SizedBox(height: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("Current match"),
+                        const SizedBox(height: 4),
+                        CurrentMatchWidget(
+                            currentMatch: viewModel.currentMatch,
+                            onCurrentMatchPressed: (String matchId) {
+                              print(matchId);
+                            })
+                      ],
+                    )
                   ],
                 ),
-              );
-            }
-          }
-      ),
+              ],
+            ),
+          );
+        }
+      }),
     );
   }
-
 }

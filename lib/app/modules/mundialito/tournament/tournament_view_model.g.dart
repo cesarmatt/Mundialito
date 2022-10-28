@@ -73,15 +73,6 @@ mixin _$TournamentViewModel on _TournamentViewModelBase, Store {
     });
   }
 
-  late final _$getMundialitoAsyncAction =
-      AsyncAction('_TournamentViewModelBase.getMundialito', context: context);
-
-  @override
-  Future<void> getMundialito(String mundialitoId) {
-    return _$getMundialitoAsyncAction
-        .run(() => super.getMundialito(mundialitoId));
-  }
-
   @override
   String toString() {
     return '''

@@ -17,7 +17,7 @@ class Mundialito {
   String name;
   Timestamp startDate;
   Timestamp? endDate;
-  List<dynamic> contenders;
+  List<Contender> contenders;
   String owner;
   List<Match> matches;
   bool isCompleted;
@@ -28,7 +28,7 @@ class Mundialito {
             name: json['name']! as String,
             startDate: json['startDate']! as Timestamp,
             endDate: json['endDate']! as Timestamp?,
-            contenders: json['contenders']! as List<String>,
+            contenders: json['contenders']! as List<Contender>,
             owner: json['owner']! as String,
             matches: json['matches']! as List<Match>,
             isCompleted: json['isCompleted']! as bool);

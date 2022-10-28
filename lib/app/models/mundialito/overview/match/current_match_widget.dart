@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mundialito/app/models/match/match.dart';
+import 'package:mundialito/app/theme/mundialito_theme.dart';
 
 class CurrentMatchWidget extends StatelessWidget {
   const CurrentMatchWidget(
@@ -17,6 +18,7 @@ class CurrentMatchWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => onCurrentMatchPressed(currentMatch?.uid ?? ""),
       child: Card(
+        color: MundialitoTheme.getPrimaryColor(),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Row(

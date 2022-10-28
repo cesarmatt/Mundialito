@@ -126,7 +126,7 @@ class MundialitoTheme {
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: _chameleon
       ),
-      cardColor: _great,
+      cardColor: Colors.transparent,
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: _chameleon
       )

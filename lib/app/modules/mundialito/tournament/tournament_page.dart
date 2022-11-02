@@ -36,7 +36,9 @@ class TournamentPageState extends State<TournamentPage> {
               Modular.to.pushNamed('/tournament/overview/${widget.mundialitoId}');
             } else if (index == 2) {
               Modular.to.pushNamed('/tournament/matches/${widget.mundialitoId}');
-            } else if (index == viewModel.currentIndex) {}
+            } else if (index == viewModel.currentIndex) {
+              Modular.to.pushNamed('/tournament/overview/${widget.mundialitoId}');
+            }
           },
           currentIndex: viewModel.currentIndex,
           items: const [

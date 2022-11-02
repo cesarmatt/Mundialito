@@ -2,7 +2,7 @@ import 'package:mundialito/app/firebase/onboarding/mundialito/detail/mundialito_
 import 'package:mundialito/app/models/mundialito/mundialito.dart';
 
 class MundialitoDetailRepository {
-  MundialitoDetailRemoteDataSource _remoteDataSource = MundialitoDetailRemoteDataSource();
+  final MundialitoDetailRemoteDataSource _remoteDataSource = MundialitoDetailRemoteDataSource();
 
   Future<Mundialito?> getMundialitoById(String mundialitoId) async {
     var response = await _remoteDataSource.getMundialitoById(mundialitoId);

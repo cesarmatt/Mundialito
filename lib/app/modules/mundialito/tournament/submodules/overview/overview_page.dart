@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mundialito/app/models/contender/contender.dart';
 import 'package:mundialito/app/models/mundialito/overview/match/current_match_widget.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/overview_view_model.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/widgets/table/table_widget.dart';

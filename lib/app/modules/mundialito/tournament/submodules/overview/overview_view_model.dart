@@ -9,7 +9,7 @@ part 'overview_view_model.g.dart';
 class OverviewViewModel = _OverviewViewModelBase with _$OverviewViewModel;
 
 abstract class _OverviewViewModelBase with Store {
-  OverviewUseCase _useCase = OverviewUseCase();
+  final OverviewUseCase _useCase = OverviewUseCase();
 
   @observable
   bool isLoading = true;

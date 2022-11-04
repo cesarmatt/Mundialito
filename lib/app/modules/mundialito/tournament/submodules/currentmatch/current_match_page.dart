@@ -78,7 +78,7 @@ class CurrentMatchPageState extends State<CurrentMatchPage> {
   }
 
   void _onCancelMatchPressed() async {
-    viewModel.onCancelMatchPressed();
+    await viewModel.onCancelMatchPressed();
     Modular.to.pop();
   }
 

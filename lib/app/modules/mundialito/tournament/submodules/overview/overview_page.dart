@@ -74,7 +74,7 @@ class OverviewPageState extends State<OverviewPage> {
                         CurrentMatchWidget(
                             currentMatch: viewModel.currentMatch,
                             onCurrentMatchPressed: (String matchId) {
-                              print(matchId);
+                              _onCurrentMatchPressed(matchId);
                             })
                       ],
                     )
@@ -86,5 +86,9 @@ class OverviewPageState extends State<OverviewPage> {
         }
       }),
     );
+  }
+
+  void _onCurrentMatchPressed(String matchId) {
+    Modular.to.pushNamed('/tournament/currentmatch/$matchId', arguments: matchId, forRoot: true);
   }
 }

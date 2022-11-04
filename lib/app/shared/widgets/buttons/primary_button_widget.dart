@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mundialito/app/theme/mundialito_theme.dart';
 
 class PrimaryButtonWidget extends StatelessWidget {
   const PrimaryButtonWidget(
@@ -23,7 +24,8 @@ class PrimaryButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 16, vertical: verticalPadding ?? 8),
+      padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding ?? 16, vertical: verticalPadding ?? 8),
       child: SizedBox(
         width: width ?? double.infinity,
         height: height ?? 50,

@@ -6,24 +6,29 @@ class Match {
       required this.contenderA,
       required this.scoreContenderH,
       required this.scoreContenderA,
-      required this.isFinished});
+      required this.isFinished,
+      this.uid});
 
-  Contender contenderH;
-  Contender contenderA;
+  String? uid = "";
+  String contenderH;
+  String contenderA;
   int scoreContenderH = 0;
   int scoreContenderA = 0;
   bool isFinished = false;
 
-  Match.fromJson(Map<String, Object?> json) : this(
-      contenderH: json['contenderH']! as Contender,
-      contenderA: json['contenderA']! as Contender,
-      scoreContenderH: json['scoreContenderH']! as int,
-      scoreContenderA: json['scoreContenderA']! as int,
-      isFinished: json['isFinished']! as bool,
-  );
+  Match.fromJson(Map<String, Object?> json)
+      : this(
+          uid: json['uid']! as String,
+          contenderH: json['contenderH']! as String,
+          contenderA: json['contenderA']! as String,
+          scoreContenderH: json['scoreContenderH']! as int,
+          scoreContenderA: json['scoreContenderA']! as int,
+          isFinished: json['isFinished']! as bool,
+        );
 
   Map<String, Object?> toJson() {
     return {
+      'uid': uid,
       'contenderH': contenderH,
       'contenderA': contenderA,
       'scoreContenderH': scoreContenderH,

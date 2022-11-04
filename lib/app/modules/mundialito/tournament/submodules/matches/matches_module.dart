@@ -11,6 +11,6 @@ class MatchesModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute("/", child: (_, args) => MatchesPage())
+    ChildRoute("/:id", child: (_, args) => MatchesPage(mundialitoId: args.params["id"]))
   ];
 }

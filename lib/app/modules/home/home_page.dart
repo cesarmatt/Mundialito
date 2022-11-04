@@ -45,12 +45,16 @@ class HomePageState extends State<HomePage> {
         } else {
           return SingleChildScrollView(
             child: MundialitoListWidget(
-                onItemPressed: (mundialitoId) { print("Pressed"); },
+                onItemPressed: (mundialitoId) { _onMundialitoPressed(mundialitoId); },
                 mundialitos: viewModel.mundialitos
             ),
           );
         }
       })
     );
+  }
+
+  void _onMundialitoPressed(String mundialitoId) {
+    Modular.to.pushNamed('/tournament/', arguments: mundialitoId);
   }
 }

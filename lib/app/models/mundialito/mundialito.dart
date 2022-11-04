@@ -10,28 +10,32 @@ class Mundialito {
       required this.contenders,
       required this.owner,
       required this.matches,
-      required this.isCompleted});
+      required this.isCompleted,
+      this.uid});
 
+  String? uid = "";
   String name;
   Timestamp startDate;
   Timestamp? endDate;
   List<Contender> contenders;
-  Contender owner;
+  String owner;
   List<Match> matches;
   bool isCompleted;
 
   Mundialito.fromJson(Map<String, Object?> json)
       : this(
+            uid: json['uid']! as String,
             name: json['name']! as String,
             startDate: json['startDate']! as Timestamp,
             endDate: json['endDate']! as Timestamp?,
             contenders: json['contenders']! as List<Contender>,
-            owner: json['owner']! as Contender,
+            owner: json['owner']! as String,
             matches: json['matches']! as List<Match>,
             isCompleted: json['isCompleted']! as bool);
 
   Map<String, Object?> toJson() {
     return {
+      'uid': uid,
       'name': name,
       'startDate': startDate,
       'endDate': endDate,

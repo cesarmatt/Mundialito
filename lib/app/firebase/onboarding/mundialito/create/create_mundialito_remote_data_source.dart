@@ -20,7 +20,7 @@ class CreateMundialitoRemoteDataSource implements CreateMundialitoService {
   );
 
   @override
-  Future<bool> createMundialito(MundialitoFirebaseObject mundialito) async {
+  Future<String> createMundialito(MundialitoFirebaseObject mundialito) async {
     var matches = [];
     for (var match in mundialito.matches) {
       var matchReference = await saveMatch(match);
@@ -28,7 +28,7 @@ class CreateMundialitoRemoteDataSource implements CreateMundialitoService {
     }
     mundialito.matches = matches;
     var response = await _firebaseFirestoreMundialitoRef.add(mundialito);
-    return response != null;
+    return response.id;
   }
 
   @override

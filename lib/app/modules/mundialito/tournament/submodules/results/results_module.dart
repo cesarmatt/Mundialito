@@ -11,7 +11,7 @@ class ResultsModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute("/", child: (_, args) => ResultsPage())
+    ChildRoute("/:id", child: (_, args) => ResultsPage(mundialitoId: args.params["id"]))
   ];
 
 }

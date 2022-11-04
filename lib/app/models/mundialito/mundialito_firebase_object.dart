@@ -9,8 +9,10 @@ class MundialitoFirebaseObject {
       required this.contenders,
       required this.owner,
       required this.matches,
-      required this.isCompleted});
+      required this.isCompleted,
+      this.uid});
 
+  String? uid;
   String name;
   Timestamp startDate;
   Timestamp? endDate;

@@ -5,7 +5,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/tournament_view_model.dart';
 
 class TournamentPage extends StatefulWidget {
-  const TournamentPage({Key? key}) : super(key: key);
+  const TournamentPage({Key? key, required this.mundialitoId}) : super(key: key);
+
+  final String mundialitoId;
 
   @override
   TournamentPageState createState() => TournamentPageState();
@@ -16,6 +18,7 @@ class TournamentPageState extends State<TournamentPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.mundialitoId);
     var textTheme = Theme
         .of(context)
         .textTheme;
@@ -28,12 +31,14 @@ class TournamentPageState extends State<TournamentPage> {
               viewModel.currentIndex = index;
             });
             if (index == 0) {
-              Modular.to.pushNamed('/tournament/results/');
+              Modular.to.pushNamed('/tournament/results/${widget.mundialitoId}');
             } else if (index == 1) {
-              Modular.to.pushNamed('/tournament/overview/');
+              Modular.to.pushNamed('/tournament/overview/${widget.mundialitoId}');
             } else if (index == 2) {
-              Modular.to.pushNamed('/tournament/matches/');
-            } else if (index == viewModel.currentIndex) {}
+              Modular.to.pushNamed('/tournament/matches/${widget.mundialitoId}');
+            } else if (index == viewModel.currentIndex) {
+              Modular.to.pushNamed('/tournament/overview/${widget.mundialitoId}');
+            }
           },
           currentIndex: viewModel.currentIndex,
           items: const [

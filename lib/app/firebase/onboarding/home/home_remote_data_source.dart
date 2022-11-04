@@ -25,7 +25,13 @@ class HomeRemoteDataSource implements HomeService {
   }
 
   List<MundialitoFirebaseObject>? _makeMundialitoList(List<QueryDocumentSnapshot<MundialitoFirebaseObject>> snapshot) {
-    return snapshot.map((mundialito) => mundialito.data()).toList();
+    var mundialitoList = <MundialitoFirebaseObject>[];
+    for (var item in snapshot) {
+      MundialitoFirebaseObject mundialitoFirebaseObject = item.data();
+      mundialitoFirebaseObject.uid = item.id;
+      mundialitoList.add(mundialitoFirebaseObject);
+    }
+    return mundialitoList;
   }
 
 }

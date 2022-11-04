@@ -11,6 +11,6 @@ class OverviewModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute("/", child: (_, args) => OverviewPage())
+    ChildRoute("/:id", child: (_, args) => OverviewPage(mundialitoId: args.params["id"]))
   ];
 }

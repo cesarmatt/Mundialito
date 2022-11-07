@@ -32,4 +32,9 @@ abstract class _HomeViewModelBase with Store {
       isError = true;
     }
   }
+
+  bool isSelectedMundialitoFinished(String mundialitoId) {
+    MundialitoFirebaseObject selectedMundialito = mundialitos.firstWhere((mundialito) => mundialito.uid == mundialitoId);
+    return selectedMundialito.isCompleted;
+  }
 }

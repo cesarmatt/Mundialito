@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mundialito/app/modules/home/home_view_model.dart';
 import 'package:mundialito/app/modules/home/list/mundialito_list_widget.dart';
-import 'package:mundialito/app/modules/home/widgets/bottombar/home_bottom_bar_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mundialito/app/shared/widgets/liststate/empty_state_widget.dart';
 import 'package:mundialito/app/shared/widgets/liststate/primary_loader_widget.dart';
-import 'package:mundialito/app/theme/mundialito_theme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -55,6 +53,11 @@ class HomePageState extends State<HomePage> {
   }
 
   void _onMundialitoPressed(String mundialitoId) {
-    Modular.to.pushNamed('/tournament/', arguments: mundialitoId);
+    bool isFinished = viewModel.isSelectedMundialitoFinished(mundialitoId);
+    if (isFinished) {
+      Modular.to.pushNamed('/tournament/endedresult/$mundialitoId');
+    } else {
+      Modular.to.pushNamed('/tournament/', arguments: mundialitoId);
+    }
   }
 }

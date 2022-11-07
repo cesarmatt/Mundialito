@@ -11,8 +11,6 @@ class ResultForContender {
 
   static List<ResultForContender> makeResultsList(List<Match> matches,
       List<Contender> contenders) {
-    // For each contender we must check
-    // Which matches he played and when he won or lost
     var resultForContenderList = <ResultForContender>[];
     for (Contender contender in contenders) {
       var wins = 0;

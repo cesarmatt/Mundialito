@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mundialito/app/modules/mundialito/endedresult/ended_result_module.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/currentmatch/current_match_module.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/matches/matches_module.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/overview_module.dart';
@@ -19,7 +20,8 @@ class TournamentModule extends Module {
       ModuleRoute('/matches', module: MatchesModule()),
       ModuleRoute('/overview', module: OverviewModule()),
       ModuleRoute('/results', module: ResultsModule()),
-      ModuleRoute('/currentmatch', module: CurrentMatchModule())
+      ModuleRoute('/currentmatch', module: CurrentMatchModule()),
+      ModuleRoute('/endedresult', module: EndedResultModule())
     ]),
   ];
 

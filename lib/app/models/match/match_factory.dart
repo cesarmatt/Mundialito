@@ -4,7 +4,6 @@ import 'package:mundialito/app/models/match/match.dart';
 import 'package:mundialito/app/models/match/match_firebase_object.dart';
 
 class MatchFactory {
-
   List<MatchFirebaseObject> shuffledFromContenderList(List<String> contenders) {
     List<MatchFirebaseObject> matches = _getShuffledList(contenders);
     return matches;
@@ -22,14 +21,33 @@ class MatchFactory {
       contenders.remove(contenderH);
       var contenderA = _getRandomContender(contenders);
       contenders.remove(contenderA);
-      MatchFirebaseObject toCreateMatch = MatchFirebaseObject(
-          contenderH: contenderH,
-          contenderA: contenderA,
-          scoreContenderH: 0,
-          scoreContenderA: 0,
-          isFinished: false
+      MatchFirebaseObject toCreateMatch = _makeToCreateMatchObject(
+          matches.length + 1,
+          contenderH,
+          contenderA,
+          0,
+          0,
+          [0, 0]
       );
       matches.add(toCreateMatch);
+    }
+
+    var numberOfFutureMatches = matches.length / 2;
+
+    for (var index = 0, matchNumber = 1; index <= numberOfFutureMatches; index++) {
+      var winner1 = matchNumber;
+      var winner2 = matchNumber + 1;
+      List<int> cameFrom = [winner1, winner2];
+      MatchFirebaseObject futureMatch = _makeToCreateMatchObject(
+          matches.length + 1,
+          'Winner #$winner1',
+          'Winner #$winner2',
+          0,
+          0,
+          cameFrom
+      );
+      matchNumber = matchNumber + 2;
+      matches.add(futureMatch);
     }
 
     return matches.toSet().toList();
@@ -38,5 +56,22 @@ class MatchFactory {
   String _getRandomContender(List<String> contenders) {
     var randomIndex = Random().nextInt(contenders.length);
     return contenders[randomIndex];
+  }
+
+  MatchFirebaseObject _makeToCreateMatchObject(
+      int matchIdentifier,
+      String contenderH,
+      String contenderA,
+      int scoreContenderH,
+      int scoreContenderA,
+      List<int> cameFrom) {
+    return MatchFirebaseObject(
+        matchIdentifier: matchIdentifier,
+        contenderH: contenderH,
+        contenderA: contenderA,
+        scoreContenderH: scoreContenderH,
+        scoreContenderA: scoreContenderA,
+        isFinished: false,
+        cameFrom: cameFrom);
   }
 }

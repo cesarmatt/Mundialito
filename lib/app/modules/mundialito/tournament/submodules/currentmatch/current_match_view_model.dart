@@ -67,7 +67,26 @@ abstract class _CurrentMatchViewModelBase with Store {
       isDraw = true;
     } else {
       isDraw = false;
-      _repository.finishMatch(match?.uid ?? "");
+      await _updateNextMatch();
+      await _repository.finishMatch(match?.uid ?? "");
+      await _updateNextMatch();
+    }
+  }
+
+  @action
+  Future<void> _updateNextMatch() async {
+    String winner;
+    if (homeScore > awayScore) {
+      winner = match?.contenderH ?? "";
+    } else {
+      winner = match?.contenderA ?? "";
+    }
+    var response = await _repository.updateNextStageForWinner(match?.matchIdentifier ?? 0, winner);
+    if (response) {
+      isLoading = false;
+    } else {
+      isLoading = false;
+      isError = true;
     }
   }
 

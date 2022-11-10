@@ -38,7 +38,7 @@ class OverviewPageState extends State<OverviewPage> {
           return const PrimaryLoaderWidget();
         } else {
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
                 Column(

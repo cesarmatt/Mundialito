@@ -36,7 +36,7 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
           },
           label: "Start mundialito!"),
       body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Observer(
             builder: (_) {
               return SingleChildScrollView(
@@ -94,57 +94,11 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        ToggleButtonWithLabelWidget(
-                          onOptionSelected: (bool selectedValue) {
-                            setState(() {
-                              viewModel
-                                  .onMundialitoEndDateDefined(selectedValue);
-                            });
-                          },
-                          label: "Do you know when the mundialito will end?",
-                          options: [
-                            Text(
-                              "Yes",
-                              style:
-                                  textTheme.bodyText2?.copyWith(fontSize: 16),
-                            ),
-                            Text(
-                              "No",
-                              style:
-                                  textTheme.bodyText2?.copyWith(fontSize: 16),
-                            )
-                          ],
-                          selectedOptions: viewModel.mundialitoEndDateToggle,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        viewModel.mundialitoHasEndDate()
-                            ? Column(
-                                children: [
-                                  DatePickerInputWidget(
-                                    inputTextEditingController: viewModel
-                                        .mundialitoEndDateTextEditingController,
-                                    hint:
-                                        "Select the end date for your mundialito",
-                                    onPressed: () {
-                                      _onDatePickerClicked(
-                                          DateInputTarget.endDate, context);
-                                    },
-                                  ),
-                                  const SizedBox(
-                                    height: 16,
-                                  )
-                                ],
-                              )
-                            : const SizedBox(
-                                height: 0,
-                              ),
                         const FormTitleWithSubtitleWidget(
                             title:
                                 "Now, let us know who will be the contenders",
                             subtitle:
-                                "You need an even number of contenders to enhance your experience"),
+                                "You need an even number of contenders"),
                         const SizedBox(
                           height: 16,
                         ),

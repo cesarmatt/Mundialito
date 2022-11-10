@@ -66,11 +66,13 @@ class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
     var matchFirebase = snapshot.data();
     return Match(
         uid: snapshot.id,
+        matchIdentifier: matchFirebase?.matchIdentifier ?? 0,
         contenderH: matchFirebase?.contenderH ?? "",
         contenderA: matchFirebase?.contenderA ?? "",
         scoreContenderH: matchFirebase?.scoreContenderH ?? 0,
         scoreContenderA: matchFirebase?.scoreContenderA ?? 0,
-        isFinished: matchFirebase?.isFinished ?? false);
+        isFinished: matchFirebase?.isFinished ?? false,
+        cameFrom: matchFirebase?.cameFrom ?? []);
   }
 
   Contender _makeContender(dynamic contender) {

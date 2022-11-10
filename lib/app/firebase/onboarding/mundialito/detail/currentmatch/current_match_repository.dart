@@ -9,6 +9,11 @@ class CurrentMatchRepository {
     return response;
   }
 
+  Future<bool> updateNextStageForWinner(int currentMatchIdentifier, String contender) async {
+    var response = await _remoteDataSource.updateNextStageForWinner(currentMatchIdentifier, contender);
+    return response;
+  }
+
   Future<bool> cancelMatch(String matchId) async {
     var response = await _remoteDataSource.cancelMatch(matchId);
     return response;

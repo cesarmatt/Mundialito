@@ -19,14 +19,14 @@ class ResultForContender {
         if (match.contenderH == contender.name) {
           if (match.scoreContenderH > match.scoreContenderA) {
             wins++;
-          } else if (match.scoreContenderH > match.scoreContenderA) {
+          } else if (match.scoreContenderA > match.scoreContenderH) {
             losses++;
           }
         } else if (match.contenderA == contender.name) {
           if (match.scoreContenderH > match.scoreContenderA) {
-            wins++;
-          } else if (match.scoreContenderH > match.scoreContenderA) {
             losses++;
+          } else if (match.scoreContenderA > match.scoreContenderH) {
+            wins++;
           }
         }
       }

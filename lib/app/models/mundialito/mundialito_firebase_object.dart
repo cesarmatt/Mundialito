@@ -30,7 +30,7 @@ class MundialitoFirebaseObject {
       : this(
       name: json['name']! as String,
       startDate: json['startDate']! as Timestamp,
-      endDate: json['endDate']! as Timestamp?,
+      endDate: json['endDate'] as Timestamp?,
       contenders: json['contenders']! as List<dynamic>,
       owner: json['owner']! as String,
       matches: json['matches']! as List<dynamic>,

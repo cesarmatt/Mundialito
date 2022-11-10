@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:mundialito/app/models/match/match_firebase_object.dart';
 import 'package:mundialito/app/models/match/match.dart';
 import 'current_match_service.dart';
@@ -42,6 +43,33 @@ class CurrentMatchRemoteDataSource implements CurrentMatchService {
   }
 
   @override
+  Future<bool> updateNextStageForWinner(int currentMatchIdentifier, String contender) async {
+    late bool response;
+    var querySnapshotList = await _firebaseFirestoreMatchRef
+        .where('cameFrom', arrayContains: currentMatchIdentifier)
+        .get()
+        .then((snapshot) => snapshot.docs);
+    var match = await _makeMatchFromQuerySnapshot(querySnapshotList, currentMatchIdentifier);
+    if (match?.contenderH.contains("Winner #$currentMatchIdentifier") == true) {
+      await _firebaseFirestoreMatchRef
+          .doc(match?.uid ?? "")
+          .update({'contenderH': contender})
+          .then((value) => response = true)
+          .catchError((error) => response = false);
+    } else if (match?.contenderA.contains("Winner #$currentMatchIdentifier") == true) {
+      await _firebaseFirestoreMatchRef
+          .doc(match?.uid ?? "")
+          .update({'contenderA': contender})
+          .then((value) => response = true)
+          .catchError((error) => response = false);
+    } else {
+      response = false;
+    }
+
+    return response;
+  }
+
+  @override
   Future<bool> updateAwayScore(String matchId, int score) async {
     late bool response;
     var awayScore = score;
@@ -69,10 +97,22 @@ class CurrentMatchRemoteDataSource implements CurrentMatchService {
     var matchFirebase = snapshot.data();
     return Match(
         uid: snapshot.id,
+        matchIdentifier: matchFirebase?.matchIdentifier ?? 0,
         contenderH: matchFirebase?.contenderH ?? "",
         contenderA: matchFirebase?.contenderA ?? "",
         scoreContenderH: matchFirebase?.scoreContenderH ?? 0,
         scoreContenderA: matchFirebase?.scoreContenderA ?? 0,
-        isFinished: matchFirebase?.isFinished ?? false);
+        isFinished: matchFirebase?.isFinished ?? false,
+        cameFrom: matchFirebase?.cameFrom ?? []);
+  }
+
+  Future<Match?> _makeMatchFromQuerySnapshot(List<QueryDocumentSnapshot<MatchFirebaseObject>> querySnapshot, int cameFrom) async {
+    var futureMatchId = querySnapshot.firstWhereOrNull((match) => match.data().cameFrom.contains(cameFrom))?.id;
+    if (futureMatchId != null) {
+      var match = await getMatchById(futureMatchId);
+      return match;
+    } else {
+      return null;
+    }
   }
 }

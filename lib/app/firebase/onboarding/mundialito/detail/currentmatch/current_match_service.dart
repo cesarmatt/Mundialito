@@ -6,4 +6,5 @@ abstract class CurrentMatchService {
   Future<bool> cancelMatch(String matchId);
   Future<bool> updateHomeScore(String matchId, int score);
   Future<bool> updateAwayScore(String matchId, int score);
+  Future<bool> updateNextStageForWinner(int currentMatchIdentifier, String contender);
 }

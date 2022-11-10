@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:mundialito/app/models/match/match_firebase_object.dart';
 import 'package:mundialito/app/models/match/match.dart';
 import 'current_match_service.dart';
@@ -49,15 +50,15 @@ class CurrentMatchRemoteDataSource implements CurrentMatchService {
         .get()
         .then((snapshot) => snapshot.docs);
     var match = await _makeMatchFromQuerySnapshot(querySnapshotList, currentMatchIdentifier);
-    if (match.contenderH.contains("Winner #$currentMatchIdentifier")) {
+    if (match?.contenderH.contains("Winner #$currentMatchIdentifier") == true) {
       await _firebaseFirestoreMatchRef
-          .doc(match.uid)
+          .doc(match?.uid ?? "")
           .update({'contenderH': contender})
           .then((value) => response = true)
           .catchError((error) => response = false);
-    } else if (match.contenderA.contains("Winner #$currentMatchIdentifier")) {
+    } else if (match?.contenderA.contains("Winner #$currentMatchIdentifier") == true) {
       await _firebaseFirestoreMatchRef
-          .doc(match.uid)
+          .doc(match?.uid ?? "")
           .update({'contenderA': contender})
           .then((value) => response = true)
           .catchError((error) => response = false);
@@ -105,9 +106,13 @@ class CurrentMatchRemoteDataSource implements CurrentMatchService {
         cameFrom: matchFirebase?.cameFrom ?? []);
   }
 
-  Future<Match> _makeMatchFromQuerySnapshot(List<QueryDocumentSnapshot<MatchFirebaseObject>> querySnapshot, int cameFrom) async {
-    var futureMatchId = querySnapshot.firstWhere((match) => match.data().cameFrom.contains(cameFrom)).id;
-    var match = await getMatchById(futureMatchId);
-    return match;
+  Future<Match?> _makeMatchFromQuerySnapshot(List<QueryDocumentSnapshot<MatchFirebaseObject>> querySnapshot, int cameFrom) async {
+    var futureMatchId = querySnapshot.firstWhereOrNull((match) => match.data().cameFrom.contains(cameFrom))?.id;
+    if (futureMatchId != null) {
+      var match = await getMatchById(futureMatchId);
+      return match;
+    } else {
+      return null;
+    }
   }
 }

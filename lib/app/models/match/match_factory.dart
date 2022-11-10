@@ -34,20 +34,32 @@ class MatchFactory {
 
     var numberOfFutureMatches = matches.length / 2;
 
-    for (var index = 0, matchNumber = 1; index <= numberOfFutureMatches; index++) {
-      var winner1 = matchNumber;
-      var winner2 = matchNumber + 1;
-      List<int> cameFrom = [winner1, winner2];
+    if (numberOfFutureMatches == 1) {
       MatchFirebaseObject futureMatch = _makeToCreateMatchObject(
           matches.length + 1,
-          'Winner #$winner1',
-          'Winner #$winner2',
+          'Winner #1',
+          'Winner #2',
           0,
           0,
-          cameFrom
+          [1, 2]
       );
-      matchNumber = matchNumber + 2;
       matches.add(futureMatch);
+    } else {
+      for (var index = 0, matchNumber = 1; index <= numberOfFutureMatches; index++) {
+        var winner1 = matchNumber;
+        var winner2 = matchNumber + 1;
+        List<int> cameFrom = [winner1, winner2];
+        MatchFirebaseObject futureMatch = _makeToCreateMatchObject(
+            matches.length + 1,
+            'Winner #$winner1',
+            'Winner #$winner2',
+            0,
+            0,
+            cameFrom
+        );
+        matchNumber = matchNumber + 2;
+        matches.add(futureMatch);
+      }
     }
 
     return matches.toSet().toList();

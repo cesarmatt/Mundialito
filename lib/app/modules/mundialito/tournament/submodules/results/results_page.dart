@@ -36,11 +36,14 @@ class ResultsPageState extends State<ResultsPage> {
       body: Observer(builder: (_) {
         if (viewModel.isLoading) {
           return const PrimaryLoaderWidget();
-        } else if (viewModel.mundialitoFinishedMatches?.matches.isEmpty == true) {
-          return const EmptyStateWidget();
+        } else if (viewModel.mundialitoFinishedMatches?.matches.isEmpty ==
+            true) {
+          return const EmptyStateWidget(
+            message: "No match has ended yet.",
+          );
         } else {
           return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -49,7 +52,9 @@ class ResultsPageState extends State<ResultsPage> {
                   style: textTheme.headline1?.copyWith(),
                 ),
                 const SizedBox(height: 16),
-                MatchesListWidget(matches: viewModel.mundialitoFinishedMatches?.matches ?? <Match>[])
+                MatchesListWidget(
+                    matches: viewModel.mundialitoFinishedMatches?.matches ??
+                        <Match>[])
               ],
             ),
           );
@@ -57,5 +62,4 @@ class ResultsPageState extends State<ResultsPage> {
       }),
     );
   }
-
 }

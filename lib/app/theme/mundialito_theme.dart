@@ -129,6 +129,9 @@ class MundialitoTheme {
       cardColor: Colors.transparent,
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: _chameleon
+      ),
+      popupMenuTheme: PopupMenuThemeData(
+        color: Colors.white,
       )
     );
   }

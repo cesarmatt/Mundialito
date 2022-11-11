@@ -16,12 +16,12 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final HomeViewModel viewModel = Modular.get();
+  final HomeViewModel _viewModel = Modular.get();
 
   @override
   void initState() {
     super.initState();
-    viewModel.getMundialitos();
+    _viewModel.getMundialitos();
   }
 
   @override
@@ -31,20 +31,20 @@ class HomePageState extends State<HomePage> {
         .textTheme;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () { Modular.to.pushNamed('/mundialito/'); },
+        onPressed: () { _onCreatePressed(); },
         child: SvgPicture.asset('assets/flag_circle_black_24dp.svg',
             color: Colors.white, width: 40, height: 40),
       ),
       body: Observer(builder: (_) {
-        if (viewModel.isLoading) {
+        if (_viewModel.isLoading) {
           return const PrimaryLoaderWidget();
-        } else if (viewModel.mundialitos.isEmpty) {
-          return const EmptyStateWidget();
+        } else if (_viewModel.mundialitos.isEmpty) {
+          return const EmptyStateWidget(message: "You don't have any mundialitos yet.",);
         } else {
           return SingleChildScrollView(
             child: MundialitoListWidget(
                 onItemPressed: (mundialitoId) { _onMundialitoPressed(mundialitoId); },
-                mundialitos: viewModel.mundialitos
+                mundialitos: _viewModel.mundialitos
             ),
           );
         }
@@ -52,12 +52,13 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  void _onMundialitoPressed(String mundialitoId) {
-    bool isFinished = viewModel.isSelectedMundialitoFinished(mundialitoId);
-    if (isFinished) {
-      Modular.to.pushNamed('/tournament/endedresult/$mundialitoId');
-    } else {
-      Modular.to.pushNamed('/tournament/', arguments: mundialitoId);
-    }
+  Future<void> _onMundialitoPressed(String mundialitoId) async {
+    await Modular.to.pushNamed('/tournament/', arguments: mundialitoId);
+    await _viewModel.getMundialitos();
+  }
+
+  Future<void> _onCreatePressed() async {
+    await Modular.to.pushNamed('/mundialito/');
+    await _viewModel.getMundialitos();
   }
 }

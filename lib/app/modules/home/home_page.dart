@@ -26,9 +26,6 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme
-        .of(context)
-        .textTheme;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () { _onCreatePressed(); },

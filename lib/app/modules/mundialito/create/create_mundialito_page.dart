@@ -23,7 +23,7 @@ class CreateMundialitoPage extends StatefulWidget {
 }
 
 class CreateMundialitoPageState extends State<CreateMundialitoPage> {
-  final CreateMundialitoViewModel viewModel = Modular.get();
+  final CreateMundialitoViewModel _viewModel = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
       appBar: AppBar(),
       bottomNavigationBar: PrimaryButtonWidget(
           onPressed: () {
-            viewModel.onStartMundialitoClicked();
+            _onCreatePressed();
           },
           label: "Start mundialito!"),
       body: Padding(
@@ -77,13 +77,13 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
                       children: [
                         PrimaryTextInputWidget(
                             inputTextEditingController:
-                                viewModel.mundialitoNameTextEditingController,
+                                _viewModel.mundialitoNameTextEditingController,
                             hint: "Give your mundialito a name"),
                         const SizedBox(
                           height: 16,
                         ),
                         DatePickerInputWidget(
-                          inputTextEditingController: viewModel
+                          inputTextEditingController: _viewModel
                               .mundialitoStartDateTextEditingController,
                           hint: "Select a start date for your mundialito",
                           onPressed: () {
@@ -105,19 +105,19 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
                         InputTextWithActionButtonWidget(
                           onPressed: () {
                             setState(() {
-                              viewModel.onAddContenderClicked();
+                              _viewModel.onAddContenderClicked();
                             });
                           },
                           inputTextEditingController:
-                              viewModel.contenderNameTextEditingController,
+                              _viewModel.contenderNameTextEditingController,
                           hint: "Contender name",
                           icon: const Icon(Icons.add),
                         ),
                         ContendersListWidget(
-                            contenders: viewModel.contendersList,
+                            contenders: _viewModel.contendersList,
                             onItemDeleted: (String? contender) {
                               setState(() {
-                                viewModel.onDeleteContenderClicked(contender);
+                                _viewModel.onDeleteContenderClicked(contender);
                               });
                             })
                       ],
@@ -135,10 +135,10 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
     final DateTime? selectedDate = await _buildDatePicker(context);
     switch (inputTarget) {
       case DateInputTarget.startDate:
-        viewModel.onStartDateSelected(selectedDate);
+        _viewModel.onStartDateSelected(selectedDate);
         break;
       case DateInputTarget.endDate:
-        viewModel.onEndDateSelected(selectedDate);
+        _viewModel.onEndDateSelected(selectedDate);
         break;
     }
   }
@@ -162,5 +162,10 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
         });
 
     return selectedDate;
+  }
+
+  Future<void> _onCreatePressed() async {
+    await _viewModel.onStartMundialitoClicked();
+    await Modular.to.pushNamed('/tournament/', arguments: _viewModel.createdMundialitoId);
   }
 }

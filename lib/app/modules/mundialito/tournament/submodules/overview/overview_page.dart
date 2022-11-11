@@ -129,11 +129,11 @@ class OverviewPageState extends State<OverviewPage> {
 
   Future<void> _onFinishMatchPressed() async {
     await _viewModel.finishMundialito(widget.mundialitoId);
-    Modular.to.pop();
+    Modular.to.pushNamed("/home");
   }
 
   Future<void> _onCancelMatchPressed() async {
     await _viewModel.cancelMundialito(widget.mundialitoId);
-    Modular.to.pop();
+    Modular.to.pushNamed("/home");
   }
 }

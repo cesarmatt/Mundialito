@@ -43,6 +43,9 @@ abstract class _CreateMundialitoViewModelBase with Store {
   @observable
   bool error = false;
 
+  @observable
+  String? createdMundialitoId;
+
   @action
   void onMundialitoEndDateDefined(bool mundialitoHasEndDate) {
     hasEndDate = mundialitoHasEndDate;
@@ -87,13 +90,12 @@ abstract class _CreateMundialitoViewModelBase with Store {
     }
   }
 
-  void onStartMundialitoClicked() async {
+  Future<void> onStartMundialitoClicked() async {
     var mundialito = makeMundialitoFromInput();
     if (mundialito != null) {
-      var response =
-          await _createMundialitoRepository.createMundialito(mundialito);
+      var response = await _createMundialitoRepository.createMundialito(mundialito);
       if (response.isNotEmpty) {
-        Modular.to.popAndPushNamed('/tournament/$response');
+        createdMundialitoId = response;
       } else {
         error = true;
       }

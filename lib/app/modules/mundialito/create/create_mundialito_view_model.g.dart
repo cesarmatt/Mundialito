@@ -107,6 +107,23 @@ mixin _$CreateMundialitoViewModel on _CreateMundialitoViewModelBase, Store {
     });
   }
 
+  late final _$createdMundialitoIdAtom = Atom(
+      name: '_CreateMundialitoViewModelBase.createdMundialitoId',
+      context: context);
+
+  @override
+  String? get createdMundialitoId {
+    _$createdMundialitoIdAtom.reportRead();
+    return super.createdMundialitoId;
+  }
+
+  @override
+  set createdMundialitoId(String? value) {
+    _$createdMundialitoIdAtom.reportWrite(value, super.createdMundialitoId, () {
+      super.createdMundialitoId = value;
+    });
+  }
+
   late final _$_CreateMundialitoViewModelBaseActionController =
       ActionController(
           name: '_CreateMundialitoViewModelBase', context: context);
@@ -178,7 +195,8 @@ mundialitoEndDateToggle: ${mundialitoEndDateToggle},
 contendersList: ${contendersList},
 startDate: ${startDate},
 endDate: ${endDate},
-error: ${error}
+error: ${error},
+createdMundialitoId: ${createdMundialitoId}
     ''';
   }
 }

@@ -37,6 +37,49 @@ class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
     return match;
   }
 
+  @override
+  Future<bool> cancelMundialito(String mundialitoId) async {
+    var snapshot = await _firebaseFirestoreMundialitoRef.doc(mundialitoId).get();
+    Mundialito mundialito = await _makeMundialito(snapshot);
+    bool matchResponse = await _deleteMatches(mundialito.matches);
+    bool mundialitoResponse = await _deleteMundialito(mundialitoId);
+    return mundialitoResponse && matchResponse;
+  }
+
+  Future<bool> _deleteMatches(List<Match> matches) async {
+    late bool matchResponse;
+    for (Match match in matches) {
+      await _firebaseFirestoreMatchRef
+          .doc(match.uid)
+          .delete()
+          .then((value) => matchResponse = true)
+          .catchError((error) => matchResponse = false);
+    }
+
+    return matchResponse;
+  }
+
+  Future<bool> _deleteMundialito(String mundialitoId) async {
+    late bool mundialitoResponse;
+    await _firebaseFirestoreMundialitoRef
+        .doc(mundialitoId)
+        .delete()
+        .then((value) => mundialitoResponse = true)
+        .catchError((error) => mundialitoResponse = false);
+    return mundialitoResponse;
+  }
+
+  @override
+  Future<bool> finishMundialito(String mundialitoId) async {
+    late bool response;
+    await _firebaseFirestoreMundialitoRef
+        .doc(mundialitoId)
+        .update({'isCompleted': true})
+        .then((value) => response = true)
+        .catchError((error) => response = false);
+    return response;
+  }
+
   Future<Mundialito> _makeMundialito(DocumentSnapshot<MundialitoFirebaseObject> snapshot) async {
     var mundialitoFirebase = snapshot.data();
     var fromFirebaseMatches = mundialitoFirebase?.matches ?? [];
@@ -78,4 +121,5 @@ class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
   Contender _makeContender(dynamic contender) {
     return Contender(name: contender);
   }
+
 }

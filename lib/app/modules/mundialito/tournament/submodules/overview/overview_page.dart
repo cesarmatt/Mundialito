@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mundialito/app/models/mundialito/overview/end/ended_mundialito_widget.dart';
 import 'package:mundialito/app/models/mundialito/overview/match/current_match_widget.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/overview_view_model.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/widgets/table/table_widget.dart';
@@ -18,12 +19,12 @@ class OverviewPage extends StatefulWidget {
 }
 
 class OverviewPageState extends State<OverviewPage> {
-  final OverviewViewModel viewModel = Modular.get();
+  final OverviewViewModel _viewModel = Modular.get();
 
   @override
   void initState() {
     super.initState();
-    viewModel.getMundialitoOverview(widget.mundialitoId);
+    _viewModel.getMundialitoOverview(widget.mundialitoId);
   }
 
   @override
@@ -32,9 +33,18 @@ class OverviewPageState extends State<OverviewPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        actions: [
+          PopupMenuButton(
+              onSelected: _handleOptionMenuClick,
+              itemBuilder: (BuildContext context) {
+                return {'Finish', 'Cancel'}.map((option) {
+                  return PopupMenuItem(value: option, child: Text(option));
+                }).toList();
+              })
+        ],
       ),
       body: Observer(builder: (_) {
-        if (viewModel.isLoading) {
+        if (_viewModel.isLoading) {
           return const PrimaryLoaderWidget();
         } else {
           return Padding(
@@ -45,7 +55,7 @@ class OverviewPageState extends State<OverviewPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      viewModel.mundialitoOverview?.mundialitoTile ?? "",
+                      _viewModel.mundialitoOverview?.mundialitoTile ?? "",
                       style: textTheme.headline1?.copyWith(),
                       textAlign: TextAlign.center,
                     ),
@@ -54,28 +64,36 @@ class OverviewPageState extends State<OverviewPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(DateTimeUtils.getFormattedDate(
-                            viewModel.mundialitoOverview?.mundialitoDate)),
+                            _viewModel.mundialitoOverview?.mundialitoDate)),
                         Text(" - "),
                         Text(
-                            "${viewModel.mundialitoOverview?.contenders.length.toString()} contenders" ??
+                            "${_viewModel.mundialitoOverview?.contenders.length.toString()} contenders" ??
                                 ""),
                       ],
                     ),
                     const SizedBox(height: 8),
                     TableWidget(
-                      results: viewModel.results ?? [],
+                      results: _viewModel.results ?? [],
                     ),
                     const SizedBox(height: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("Current match"),
-                        const SizedBox(height: 4),
-                        CurrentMatchWidget(
-                            currentMatch: viewModel.currentMatch,
-                            onCurrentMatchPressed: (String matchId) {
-                              _onCurrentMatchPressed(matchId);
-                            })
+                        _viewModel.currentMatch != null
+                            ? Column(
+                                children: [
+                                  const Text("Current match"),
+                                  const SizedBox(height: 4),
+                                  CurrentMatchWidget(
+                                      currentMatch: _viewModel.currentMatch,
+                                      onCurrentMatchPressed: (String matchId) {
+                                        _onCurrentMatchPressed(matchId);
+                                      })
+                                ],
+                              )
+                            : EndedMundialitoWidget(onPressed: () {
+                                _onEndedMundialitoPressed();
+                              })
                       ],
                     )
                   ],
@@ -88,7 +106,34 @@ class OverviewPageState extends State<OverviewPage> {
     );
   }
 
-  void _onCurrentMatchPressed(String matchId) {
-    Modular.to.pushNamed('/tournament/currentmatch/$matchId', arguments: matchId, forRoot: true);
+  Future<void> _onCurrentMatchPressed(String matchId) async {
+    await Modular.to.pushNamed('/tournament/currentmatch/$matchId',
+        arguments: matchId, forRoot: true);
+    await _viewModel.getMundialitoOverview(widget.mundialitoId);
+  }
+
+  void _onEndedMundialitoPressed() {
+    Modular.to.pushNamed('/tournament/endedresult/${widget.mundialitoId}');
+  }
+
+  void _handleOptionMenuClick(String option) {
+    switch (option) {
+      case 'Finish':
+        _onFinishMatchPressed();
+        break;
+      case 'Cancel':
+        _onCancelMatchPressed();
+        break;
+    }
+  }
+
+  Future<void> _onFinishMatchPressed() async {
+    await _viewModel.finishMundialito(widget.mundialitoId);
+    Modular.to.pushNamed("/home");
+  }
+
+  Future<void> _onCancelMatchPressed() async {
+    await _viewModel.cancelMundialito(widget.mundialitoId);
+    Modular.to.pushNamed("/home");
   }
 }

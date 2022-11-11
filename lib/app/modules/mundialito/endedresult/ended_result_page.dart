@@ -21,6 +21,12 @@ class EndedResultPageState extends State<EndedResultPage> {
   final EndedResultViewModel _viewModel = Modular.get();
 
   @override
+  void initState() {
+    super.initState();
+    _viewModel.getMundialito(widget.mundialitoId);
+  }
+
+  @override
   Widget build(BuildContext context) {
     var textTheme = Theme
         .of(context)

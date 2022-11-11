@@ -9,4 +9,14 @@ class MundialitoDetailRepository {
     return response;
   }
 
+  Future<bool> finishMundialito(String mundialitoId) async {
+    var response = await _remoteDataSource.finishMundialito(mundialitoId);
+    return response;
+  }
+
+  Future<bool> cancelMundialito(String mundialitoId) async {
+    var response = await _remoteDataSource.cancelMundialito(mundialitoId);
+    return response;
+  }
+
 }

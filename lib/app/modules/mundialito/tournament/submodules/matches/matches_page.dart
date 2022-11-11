@@ -37,7 +37,7 @@ class MatchesPageState extends State<MatchesPage> {
         if (viewModel.isLoading) {
           return const PrimaryLoaderWidget();
         } else if (viewModel.mundialitoMatches?.matches.isEmpty == true) {
-          return const EmptyStateWidget();
+          return const EmptyStateWidget(message: "For some reason the matches were not created, please try to create your mundialito again.",);
         } else {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mundialito/app/models/match/match.dart';
 import 'package:mundialito/app/firebase/onboarding/mundialito/detail/overview/overview_use_case.dart';
@@ -43,6 +44,30 @@ abstract class _OverviewViewModelBase with Store {
 
   @action
   Future<void> _setCurrentMatch(List<Match> matches) async {
-    currentMatch = matches.firstWhere((match) => match.isFinished != true);
+    currentMatch = matches.firstWhereOrNull((match) => match.isFinished != true);
+  }
+
+  @action
+  Future<void> finishMundialito(String mundialitoId) async {
+    isLoading = true;
+    var response = await _useCase.finishMundialito(mundialitoId);
+    if (response) {
+      isLoading = false;
+    } else {
+      isLoading = false;
+      isError = true;
+    }
+  }
+
+  @action
+  Future<void> cancelMundialito(String mundialitoId) async {
+    isLoading = true;
+    var response = await _useCase.cancelMundialito(mundialitoId);
+    if (response) {
+      isLoading = false;
+    } else {
+      isLoading = false;
+      isError = true;
+    }
   }
 }

@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mundialito/app/theme/mundialito_theme.dart';
 
 class EmptyStateWidget extends StatelessWidget {
-  const EmptyStateWidget({Key? key}) : super(key: key);
+  const EmptyStateWidget({Key? key, required this.message}) : super(key: key);
+
+  final String message;
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,7 +22,7 @@ class EmptyStateWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "You don't have created data yet :(",
+                      message,
                       style: textTheme.bodyText2?.copyWith(),
                     ),
                   ],

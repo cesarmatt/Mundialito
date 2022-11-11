@@ -153,6 +153,15 @@ mixin _$CurrentMatchViewModel on _CurrentMatchViewModelBase, Store {
         .run(() => super.onFinishMatchPressed());
   }
 
+  late final _$_updateNextMatchAsyncAction = AsyncAction(
+      '_CurrentMatchViewModelBase._updateNextMatch',
+      context: context);
+
+  @override
+  Future<void> _updateNextMatch() {
+    return _$_updateNextMatchAsyncAction.run(() => super._updateNextMatch());
+  }
+
   @override
   String toString() {
     return '''

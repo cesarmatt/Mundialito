@@ -17,6 +17,12 @@ class TournamentPageState extends State<TournamentPage> {
   final TournamentViewModel viewModel = Modular.get();
 
   @override
+  void initState() {
+    super.initState();
+    Modular.to.pushNamed('/tournament/overview/${widget.mundialitoId}');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: const RouterOutlet(),

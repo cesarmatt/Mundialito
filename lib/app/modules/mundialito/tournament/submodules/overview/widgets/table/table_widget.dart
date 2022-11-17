@@ -14,16 +14,17 @@ class TableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: Column(
           children: [
             Row(
               children: const [
                 Text("Contender"),
-                Spacer(),
+                SizedBox(width: 40),
                 Text("Wins"),
-                Spacer(),
+                SizedBox(width: 40),
                 Text("Defeats")
               ],
             ),

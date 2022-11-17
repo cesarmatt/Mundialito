@@ -17,11 +17,13 @@ class TournamentPageState extends State<TournamentPage> {
   final TournamentViewModel viewModel = Modular.get();
 
   @override
+  void initState() {
+    super.initState();
+    Modular.to.pushNamed('/tournament/overview/${widget.mundialitoId}');
+  }
+
+  @override
   Widget build(BuildContext context) {
-    print(widget.mundialitoId);
-    var textTheme = Theme
-        .of(context)
-        .textTheme;
     return Scaffold(
       body: const RouterOutlet(),
       bottomNavigationBar: Observer(builder: (_) {

@@ -37,21 +37,18 @@ class MatchesPageState extends State<MatchesPage> {
         if (viewModel.isLoading) {
           return const PrimaryLoaderWidget();
         } else if (viewModel.mundialitoMatches?.matches.isEmpty == true) {
-          return const EmptyStateWidget(message: "For some reason the matches were not created, please try to create your mundialito again.",);
+          return const EmptyStateWidget(message: "Your Mundialito does not have upcoming matches.",);
         } else {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Upcoming matches",
-                  style: textTheme.headline1?.copyWith(),
-                ),
-                const SizedBox(height: 16),
-                MatchesListWidget(matches: viewModel.mundialitoMatches?.matches ?? <Match>[])
-              ],
-            ),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Upcoming matches",
+                style: textTheme.headline1?.copyWith(),
+              ),
+              const SizedBox(height: 16),
+              MatchesListWidget(matches: viewModel.mundialitoMatches?.matches ?? <Match>[])
+            ],
           );
         }
       }),

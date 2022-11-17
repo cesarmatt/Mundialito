@@ -31,9 +31,9 @@ class ContenderScoreWidget extends StatelessWidget {
         Row(
           children: [
             SecondaryButtonWidget(
-                onPressed: () => onAddButtonClicked(), icon: const Icon(Icons.add)),
-            SecondaryButtonWidget(
                 onPressed: () => onRemoveButtonClicked(), icon: const Icon(Icons.remove)),
+            SecondaryButtonWidget(
+                onPressed: () => onAddButtonClicked(), icon: const Icon(Icons.add)),
           ],
         )
       ],

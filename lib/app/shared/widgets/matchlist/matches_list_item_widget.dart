@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:mundialito/app/models/match/match.dart';
 
 class MatchesListItemWidget extends StatelessWidget {
@@ -9,15 +10,25 @@ class MatchesListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text(match.contenderH),
-          Text(" ${match.scoreContenderH} x ${match.scoreContenderA} "),
-          Text(match.contenderA),
-        ],
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        child: Row(
+          children: [
+            Text("#${match.matchIdentifier.toString()}"),
+            const SizedBox(
+              width: 16,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(match.contenderH),
+                Text(" ${match.scoreContenderH} x ${match.scoreContenderA} "),
+                Text(match.contenderA),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

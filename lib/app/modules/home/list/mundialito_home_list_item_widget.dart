@@ -18,7 +18,7 @@ class MundialitoHomeListItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => onItemPressed(mundialito.uid ?? ""),
       child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Row(
@@ -38,16 +38,16 @@ class MundialitoHomeListItemWidget extends StatelessWidget {
                   Text(
                     "${mundialito.contenders.length} players",
                     style: textTheme.caption?.copyWith(color: Colors.white),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    mundialito.isCompleted ? "ENDED" : "LIVE",
+                    style: mundialito.isCompleted
+                        ? textTheme.caption?.copyWith(color: Colors.white)
+                        : textTheme.caption?.copyWith(color: Colors.red),
                   )
                 ],
               ),
-              const Spacer(),
-              Text(
-                mundialito.isCompleted ? "ENDED" : "LIVE",
-                style: mundialito.isCompleted
-                    ? textTheme.caption?.copyWith(color: Colors.white)
-                    : textTheme.caption?.copyWith(color: Colors.red),
-              )
             ],
           ),
         ),

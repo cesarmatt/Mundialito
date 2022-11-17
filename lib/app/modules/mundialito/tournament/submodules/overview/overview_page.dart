@@ -37,7 +37,7 @@ class OverviewPageState extends State<OverviewPage> {
           PopupMenuButton(
               onSelected: _handleOptionMenuClick,
               itemBuilder: (BuildContext context) {
-                return {'Finish', 'Cancel'}.map((option) {
+                return {'Finish', 'Cancel', 'Exit'}.map((option) {
                   return PopupMenuItem(value: option, child: Text(option));
                 }).toList();
               })
@@ -47,59 +47,60 @@ class OverviewPageState extends State<OverviewPage> {
         if (_viewModel.isLoading) {
           return const PrimaryLoaderWidget();
         } else {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      _viewModel.mundialitoOverview?.mundialitoTile ?? "",
-                      style: textTheme.headline1?.copyWith(),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(DateTimeUtils.getFormattedDate(
-                            _viewModel.mundialitoOverview?.mundialitoDate)),
-                        Text(" - "),
-                        Text(
-                            "${_viewModel.mundialitoOverview?.contenders.length.toString()} contenders" ??
-                                ""),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    TableWidget(
-                      results: _viewModel.results ?? [],
-                    ),
-                    const SizedBox(height: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _viewModel.currentMatch != null
-                            ? Column(
-                                children: [
-                                  const Text("Current match"),
-                                  const SizedBox(height: 4),
-                                  CurrentMatchWidget(
-                                      currentMatch: _viewModel.currentMatch,
-                                      onCurrentMatchPressed: (String matchId) {
-                                        _onCurrentMatchPressed(matchId);
-                                      })
-                                ],
-                              )
-                            : EndedMundialitoWidget(onPressed: () {
-                                _onEndedMundialitoPressed();
+          return Column(
+            children: [
+              Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        _viewModel.mundialitoOverview?.mundialitoTile ?? "",
+                        style: textTheme.headline1?.copyWith(),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(DateTimeUtils.getFormattedDate(
+                              _viewModel.mundialitoOverview?.mundialitoDate)),
+                          Text(" - "),
+                          Text(
+                              "${_viewModel.mundialitoOverview?.contenders.length.toString()} contenders" ??
+                                  ""),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      TableWidget(
+                        results: _viewModel.results ?? [],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Column(
+                    children: [
+                      _viewModel.currentMatch != null
+                          ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text("Current match"),
+                          const SizedBox(height: 8),
+                          CurrentMatchWidget(
+                              currentMatch: _viewModel.currentMatch,
+                              onCurrentMatchPressed: (String matchId) {
+                                _onCurrentMatchPressed(matchId);
                               })
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
+                        ],
+                      )
+                          : EndedMundialitoWidget(onPressed: () {
+                        _onEndedMundialitoPressed();
+                      })
+                    ],
+                  )
+                ],
+              ),
+            ],
           );
         }
       }),
@@ -119,21 +120,27 @@ class OverviewPageState extends State<OverviewPage> {
   void _handleOptionMenuClick(String option) {
     switch (option) {
       case 'Finish':
-        _onFinishMatchPressed();
+        _onFinishMundialitoPressed();
         break;
       case 'Cancel':
-        _onCancelMatchPressed();
+        _onCancelMundialitoPressed();
         break;
+      case 'Exit':
+        _onExitMundialitoPressed();
     }
   }
 
-  Future<void> _onFinishMatchPressed() async {
+  Future<void> _onFinishMundialitoPressed() async {
     await _viewModel.finishMundialito(widget.mundialitoId);
     Modular.to.pushNamed("/home");
   }
 
-  Future<void> _onCancelMatchPressed() async {
+  Future<void> _onCancelMundialitoPressed() async {
     await _viewModel.cancelMundialito(widget.mundialitoId);
     Modular.to.pushNamed("/home");
+  }
+
+  Future<void> _onExitMundialitoPressed() async {
+    Modular.to.popAndPushNamed("/home");
   }
 }

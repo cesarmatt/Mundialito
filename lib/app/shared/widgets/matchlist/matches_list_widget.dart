@@ -10,19 +10,17 @@ class MatchesListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        child: ListView.builder(
-            itemCount: matches.length,
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) {
-              var match = matches[index];
-              return MatchesListItemWidget(match: match);
-            }),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      child: ListView.builder(
+          itemCount: matches.length,
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (BuildContext context, int index) {
+            var match = matches[index];
+            return MatchesListItemWidget(match: match);
+          }),
     );
   }
 }

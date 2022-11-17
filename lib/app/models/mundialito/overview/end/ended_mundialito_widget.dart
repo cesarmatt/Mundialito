@@ -14,6 +14,7 @@ class EndedMundialitoWidget extends StatelessWidget {
       onTap: onPressed,
       child: Card(
         color: MundialitoTheme.getPrimaryColor(),
+        margin: const EdgeInsets.symmetric(horizontal: 16),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(

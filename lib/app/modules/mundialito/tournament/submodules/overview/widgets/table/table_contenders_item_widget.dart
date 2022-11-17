@@ -9,13 +9,18 @@ class TableContendersItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Text(result.contender.name),
-        const Spacer(),
-        Text(result.wins.toString()),
-        const Spacer(),
-        Text(result.losses.toString())
+        Row(
+          children: [
+            SizedBox(width: 80, child: Text(result.contender.name)),
+            const SizedBox(width: 72),
+            Text(result.wins.toString()),
+            const SizedBox(width: 80),
+            Text(result.losses.toString())
+          ],
+        ),
+        const SizedBox(height: 8)
       ],
     );
   }

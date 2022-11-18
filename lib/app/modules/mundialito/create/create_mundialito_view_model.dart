@@ -121,7 +121,8 @@ abstract class _CreateMundialitoViewModelBase with Store {
           owner: owner,
           matches: matches,
           isCompleted: false,
-          joinCode: _generateJoinCode());
+          joinCode: _generateJoinCode(),
+          joinedUsers: []);
     } else {
       return null;
     }

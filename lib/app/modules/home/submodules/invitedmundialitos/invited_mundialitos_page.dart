@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mundialito/app/modules/home/list/mundialito_list_widget.dart';
 import 'package:mundialito/app/modules/home/submodules/invitedmundialitos/invited_mundialitos_view_model.dart';
+import 'package:mundialito/app/modules/home/widgets/list/mundialito_list_widget.dart';
 import 'package:mundialito/app/shared/widgets/liststate/empty_state_widget.dart';
 import 'package:mundialito/app/shared/widgets/liststate/primary_loader_widget.dart';
 

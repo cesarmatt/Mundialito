@@ -18,13 +18,4 @@ class OverviewUseCase {
     );
   }
 
-  Future<bool> finishMundialito(String mundialitoId) async {
-    var response = await _repository.finishMundialito(mundialitoId);
-    return response;
-  }
-
-  Future<bool> cancelMundialito(String mundialitoId) async {
-    var response = await _repository.cancelMundialito(mundialitoId);
-    return response;
-  }
 }

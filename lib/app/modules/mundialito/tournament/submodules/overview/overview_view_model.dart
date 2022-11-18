@@ -46,28 +46,4 @@ abstract class _OverviewViewModelBase with Store {
   Future<void> _setCurrentMatch(List<Match> matches) async {
     currentMatch = matches.firstWhereOrNull((match) => match.isFinished != true);
   }
-
-  @action
-  Future<void> finishMundialito(String mundialitoId) async {
-    isLoading = true;
-    var response = await _useCase.finishMundialito(mundialitoId);
-    if (response) {
-      isLoading = false;
-    } else {
-      isLoading = false;
-      isError = true;
-    }
-  }
-
-  @action
-  Future<void> cancelMundialito(String mundialitoId) async {
-    isLoading = true;
-    var response = await _useCase.cancelMundialito(mundialitoId);
-    if (response) {
-      isLoading = false;
-    } else {
-      isLoading = false;
-      isError = true;
-    }
-  }
 }

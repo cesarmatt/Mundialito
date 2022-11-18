@@ -8,7 +8,6 @@ import 'package:mundialito/app/models/mundialito/overview/match/current_match_wi
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/overview_view_model.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/widgets/table/table_widget.dart';
 import 'package:mundialito/app/shared/widgets/liststate/primary_loader_widget.dart';
-import 'package:mundialito/app/shared/widgets/snackbar/snackbar_widget.dart';
 import 'package:mundialito/app/utils/date_time_utils.dart';
 
 class OverviewPage extends StatefulWidget {
@@ -33,18 +32,6 @@ class OverviewPageState extends State<OverviewPage> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          PopupMenuButton(
-              onSelected: _handleOptionMenuClick,
-              itemBuilder: (BuildContext context) {
-                return {'Finish', 'Cancel', 'Exit', 'Share'}.map((option) {
-                  return PopupMenuItem(value: option, child: Text(option));
-                }).toList();
-              })
-        ],
-      ),
       body: Observer(builder: (_) {
         if (_viewModel.isLoading) {
           return const PrimaryLoaderWidget();
@@ -119,43 +106,4 @@ class OverviewPageState extends State<OverviewPage> {
     Modular.to.pushNamed('/tournament/endedresult/${widget.mundialitoId}');
   }
 
-  void _handleOptionMenuClick(String option) {
-    switch (option) {
-      case 'Finish':
-        _onFinishMundialitoPressed();
-        break;
-      case 'Cancel':
-        _onCancelMundialitoPressed();
-        break;
-      case 'Exit':
-        _onExitMundialitoPressed();
-        break;
-      case 'Share':
-        _onShareMundialitoPressed(context, _viewModel.mundialitoOverview?.joinCode ?? "");
-    }
-  }
-
-  Future<void> _onFinishMundialitoPressed() async {
-    await _viewModel.finishMundialito(widget.mundialitoId);
-    Modular.to.pushNamed("/home");
-  }
-
-  Future<void> _onCancelMundialitoPressed() async {
-    await _viewModel.cancelMundialito(widget.mundialitoId);
-    Modular.to.pushNamed("/home");
-  }
-
-  Future<void> _onExitMundialitoPressed() async {
-    Modular.to.popAndPushNamed("/home");
-  }
-
-  Future<void> _onShareMundialitoPressed(BuildContext context, String joinCode) async {
-    _copyCode();
-  }
-
-  Future<void> _copyCode() async {
-    Clipboard.setData(ClipboardData(text: _viewModel.mundialitoOverview?.joinCode ?? ""))
-        .then((value) => ScaffoldMessenger.of(context).showSnackBar(
-        makeSuccessSnackBar("The code was successfully copied to your clipboard!")));
-  }
 }

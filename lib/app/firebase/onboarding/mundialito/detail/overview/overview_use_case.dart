@@ -13,7 +13,8 @@ class OverviewUseCase {
         mundialitoTile: mundialito?.name ?? "",
         mundialitoDate: mundialito?.startDate ?? Timestamp.now(),
         contenders: mundialito?.contenders ?? <Contender>[],
-        matches: mundialito?.matches ?? <Match>[]
+        matches: mundialito?.matches ?? <Match>[],
+        joinCode: mundialito?.joinCode ?? ""
     );
   }
 

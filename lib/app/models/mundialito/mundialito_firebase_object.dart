@@ -5,11 +5,12 @@ class MundialitoFirebaseObject {
   MundialitoFirebaseObject(
       {required this.name,
       required this.startDate,
-      this.endDate,
       required this.contenders,
       required this.owner,
       required this.matches,
       required this.isCompleted,
+      required this.joinCode,
+      this.endDate,
       this.uid});
 
   String? uid;
@@ -20,6 +21,7 @@ class MundialitoFirebaseObject {
   String owner;
   List<dynamic> matches;
   bool isCompleted;
+  String joinCode;
 
   static String getFormattedDate(Timestamp? timestamp) {
     var timestampAsDate = timestamp?.toDate() ?? DateTime.now();
@@ -28,13 +30,14 @@ class MundialitoFirebaseObject {
 
   MundialitoFirebaseObject.fromJson(Map<String, Object?> json)
       : this(
-      name: json['name']! as String,
-      startDate: json['startDate']! as Timestamp,
-      endDate: json['endDate'] as Timestamp?,
-      contenders: json['contenders']! as List<dynamic>,
-      owner: json['owner']! as String,
-      matches: json['matches']! as List<dynamic>,
-      isCompleted: json['isCompleted']! as bool);
+            name: json['name']! as String,
+            startDate: json['startDate']! as Timestamp,
+            endDate: json['endDate'] as Timestamp?,
+            contenders: json['contenders']! as List<dynamic>,
+            owner: json['owner']! as String,
+            matches: json['matches']! as List<dynamic>,
+            isCompleted: json['isCompleted']! as bool,
+            joinCode: json['joinCode']! as String);
 
   Map<String, Object?> toJson() {
     return {
@@ -45,6 +48,7 @@ class MundialitoFirebaseObject {
       'owner': owner,
       'matches': matches,
       'isCompleted': isCompleted,
+      'joinCode': joinCode,
     };
   }
 }

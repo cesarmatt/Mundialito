@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mundialito/app/models/mundialito/overview/end/ended_mundialito_widget.dart';
@@ -7,6 +8,7 @@ import 'package:mundialito/app/models/mundialito/overview/match/current_match_wi
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/overview_view_model.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/submodules/overview/widgets/table/table_widget.dart';
 import 'package:mundialito/app/shared/widgets/liststate/primary_loader_widget.dart';
+import 'package:mundialito/app/shared/widgets/snackbar/snackbar_widget.dart';
 import 'package:mundialito/app/utils/date_time_utils.dart';
 
 class OverviewPage extends StatefulWidget {
@@ -37,7 +39,7 @@ class OverviewPageState extends State<OverviewPage> {
           PopupMenuButton(
               onSelected: _handleOptionMenuClick,
               itemBuilder: (BuildContext context) {
-                return {'Finish', 'Cancel', 'Exit'}.map((option) {
+                return {'Finish', 'Cancel', 'Exit', 'Share'}.map((option) {
                   return PopupMenuItem(value: option, child: Text(option));
                 }).toList();
               })
@@ -127,6 +129,9 @@ class OverviewPageState extends State<OverviewPage> {
         break;
       case 'Exit':
         _onExitMundialitoPressed();
+        break;
+      case 'Share':
+        _onShareMundialitoPressed(context, _viewModel.mundialitoOverview?.joinCode ?? "");
     }
   }
 
@@ -142,5 +147,15 @@ class OverviewPageState extends State<OverviewPage> {
 
   Future<void> _onExitMundialitoPressed() async {
     Modular.to.popAndPushNamed("/home");
+  }
+
+  Future<void> _onShareMundialitoPressed(BuildContext context, String joinCode) async {
+    _copyCode();
+  }
+
+  Future<void> _copyCode() async {
+    Clipboard.setData(ClipboardData(text: _viewModel.mundialitoOverview?.joinCode ?? ""))
+        .then((value) => ScaffoldMessenger.of(context).showSnackBar(
+        makeSuccessSnackBar("The code was successfully copied to your clipboard!")));
   }
 }

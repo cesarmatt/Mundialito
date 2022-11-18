@@ -101,7 +101,8 @@ class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
         contenders: contenders,
         owner: mundialitoFirebase?.owner ?? "",
         matches: matches,
-        isCompleted: mundialitoFirebase?.isCompleted ?? false
+        isCompleted: mundialitoFirebase?.isCompleted ?? false,
+        joinCode: mundialitoFirebase?.joinCode ?? ""
     );
   }
 

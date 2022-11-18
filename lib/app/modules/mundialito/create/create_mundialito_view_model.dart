@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -118,9 +120,20 @@ abstract class _CreateMundialitoViewModelBase with Store {
           contenders: contendersList,
           owner: owner,
           matches: matches,
-          isCompleted: false);
+          isCompleted: false,
+          joinCode: _generateJoinCode());
     } else {
       return null;
     }
+  }
+
+  String _generateJoinCode() {
+    var rng = Random();
+    String code = "";
+    for (var i = 0; i < 5; i++) {
+      var nextNumber = rng.nextInt(9);
+      code = code + nextNumber.toString();
+    }
+    return code;
   }
 }

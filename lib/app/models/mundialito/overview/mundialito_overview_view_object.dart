@@ -7,10 +7,12 @@ class MundialitoOverviewViewObject {
       {required this.mundialitoTile,
       required this.mundialitoDate,
       required this.contenders,
-      required this.matches});
+      required this.matches,
+      required this.joinCode});
 
   final String mundialitoTile;
   final Timestamp mundialitoDate;
   final List<Contender> contenders;
   final List<Match> matches;
+  final String joinCode;
 }

@@ -15,7 +15,7 @@ class HomeRemoteDataSource implements HomeService {
 
 
   @override
-  Future<List<MundialitoFirebaseObject>?> getMundialitos() async {
+  Future<List<MundialitoFirebaseObject>?> getMyMundialitos() async {
     var snapshot = await _firebaseFirestoreMundialitoRef
         .where('owner', isEqualTo: CurrentUser.getCurrentUser().uid)
         .get()
@@ -32,6 +32,16 @@ class HomeRemoteDataSource implements HomeService {
       mundialitoList.add(mundialitoFirebaseObject);
     }
     return mundialitoList;
+  }
+
+  @override
+  Future<List<MundialitoFirebaseObject>?> getInvitedMundialitos() async {
+    var snapshot = await _firebaseFirestoreMundialitoRef
+        .where('joinedUsers', arrayContains: CurrentUser.getCurrentUser().uid)
+        .get()
+        .then((snapshot) => snapshot.docs);
+    List<MundialitoFirebaseObject>? mundialitos = _makeMundialitoList(snapshot);
+    return mundialitos ?? [];
   }
 
 }

@@ -131,7 +131,7 @@ class _HomeExpandableFloatingActionButtonState
           duration: const Duration(milliseconds: 250),
           child: FloatingActionButton(
             onPressed: _toggle,
-            child: const Icon(Icons.create),
+            child: const Icon(Icons.keyboard_double_arrow_up),
           ),
         ),
       ),

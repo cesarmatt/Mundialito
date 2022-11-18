@@ -7,18 +7,8 @@ part 'tournament_view_model.g.dart';
 class TournamentViewModel = _TournamentViewModelBase with _$TournamentViewModel;
 
 abstract class _TournamentViewModelBase with Store {
-  final MundialitoDetailRepository _repository = MundialitoDetailRepository();
-
-  @observable
-  bool isLoading = true;
-
-  @observable
-  bool isError = false;
 
   @observable
   int currentIndex = 1;
-
-  @observable
-  Mundialito? mundialito;
 
 }

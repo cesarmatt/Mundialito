@@ -132,6 +132,12 @@ class MundialitoTheme {
       ),
       popupMenuTheme: PopupMenuThemeData(
         color: Colors.white,
+      ),
+      tabBarTheme: TabBarTheme(
+        indicator: UnderlineTabIndicator(
+          borderSide: BorderSide(color: _chameleon)
+        ),
+        labelStyle: GoogleFonts.roboto()
       )
     );
   }

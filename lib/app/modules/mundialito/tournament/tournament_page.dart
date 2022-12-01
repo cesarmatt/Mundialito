@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mundialito/app/models/user/current_mundialito.dart';
 import 'package:mundialito/app/modules/mundialito/tournament/tournament_view_model.dart';
 import 'package:mundialito/app/shared/widgets/snackbar/snackbar_widget.dart';
 
@@ -74,10 +75,6 @@ class TournamentPageState extends State<TournamentPage> {
     );
   }
 
-  void _onEndedMundialitoPressed() {
-    Modular.to.pushNamed('/tournament/endedresult/${widget.mundialitoId}');
-  }
-
   void _handleOptionMenuClick(String option) {
     switch (option) {
       case 'Finish':
@@ -107,7 +104,7 @@ class TournamentPageState extends State<TournamentPage> {
   }
 
   Future<void> _copyCode() async {
-    Clipboard.setData(ClipboardData(text: _viewModel.tournament?.joinCode ?? ""))
+    Clipboard.setData(ClipboardData(text: CurrentMundialito.getCurrentMundialito().joinCode))
         .then((value) => ScaffoldMessenger.of(context).showSnackBar(
         makeSuccessSnackBar("The code was successfully copied to your clipboard!")));
   }

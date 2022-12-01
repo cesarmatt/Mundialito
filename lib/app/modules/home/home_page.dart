@@ -63,6 +63,6 @@ class HomePageState extends State<HomePage> {
   }
 
   Future<void> _onJoinPressed() async {
-    print("Join pressed!");
+    await Modular.to.pushNamed('/join');
   }
 }

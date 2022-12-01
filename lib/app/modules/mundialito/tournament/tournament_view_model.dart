@@ -26,19 +26,6 @@ abstract class _TournamentViewModelBase with Store {
   TournamentViewObject? tournament;
 
   @action
-  Future<void> getTournamentViewObject(String mundialitoId) async {
-    isLoading = true;
-    var response = await _useCase.getMundialitoTournamentViewObject(mundialitoId);
-    if (response != null) {
-      tournament = response;
-      isLoading = false;
-    } else {
-      isLoading = false;
-      isError = true;
-    }
-  }
-
-  @action
   Future<void> finishMundialito(String mundialitoId) async {
     isLoading = true;
     var response = await _useCase.finishMundialito(mundialitoId);

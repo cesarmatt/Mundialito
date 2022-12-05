@@ -36,7 +36,7 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
           },
           label: "Start mundialito!"),
       body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Observer(
             builder: (_) {
               return SingleChildScrollView(
@@ -50,7 +50,7 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              "Let's configure",
+                              "Let's create",
                               style: textTheme.headline1?.copyWith(),
                             )
                           ],
@@ -79,18 +79,6 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
                             inputTextEditingController:
                                 _viewModel.mundialitoNameTextEditingController,
                             hint: "Give your mundialito a name"),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        DatePickerInputWidget(
-                          inputTextEditingController: _viewModel
-                              .mundialitoStartDateTextEditingController,
-                          hint: "Select a start date for your mundialito",
-                          onPressed: () {
-                            _onDatePickerClicked(
-                                DateInputTarget.startDate, context);
-                          },
-                        ),
                         const SizedBox(
                           height: 16,
                         ),
@@ -128,40 +116,6 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
             },
           )),
     );
-  }
-
-  Future<void> _onDatePickerClicked(
-      DateInputTarget inputTarget, BuildContext context) async {
-    final DateTime? selectedDate = await _buildDatePicker(context);
-    switch (inputTarget) {
-      case DateInputTarget.startDate:
-        _viewModel.onStartDateSelected(selectedDate);
-        break;
-      case DateInputTarget.endDate:
-        _viewModel.onEndDateSelected(selectedDate);
-        break;
-    }
-  }
-
-  Future<DateTime?> _buildDatePicker(BuildContext context) async {
-    var textTheme = Theme.of(context).textTheme;
-    final DateTime? selectedDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2022, 1),
-        lastDate: DateTime(2025, 1),
-        builder: (context, child) {
-          return Theme(
-              data: Theme.of(context).copyWith(
-                  colorScheme: ColorScheme.light(
-                      primary: MundialitoTheme.getPrimaryColor(),
-                      onPrimary: MundialitoTheme.getOnPrimaryColor(),
-                      onSurface: MundialitoTheme.getOnSurfaceColor()),
-                  textTheme: textTheme),
-              child: child!);
-        });
-
-    return selectedDate;
   }
 
   Future<void> _onCreatePressed() async {

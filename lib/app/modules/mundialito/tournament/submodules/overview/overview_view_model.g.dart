@@ -108,24 +108,6 @@ mixin _$OverviewViewModel on _OverviewViewModelBase, Store {
         .run(() => super._setCurrentMatch(matches));
   }
 
-  late final _$finishMundialitoAsyncAction =
-      AsyncAction('_OverviewViewModelBase.finishMundialito', context: context);
-
-  @override
-  Future<void> finishMundialito(String mundialitoId) {
-    return _$finishMundialitoAsyncAction
-        .run(() => super.finishMundialito(mundialitoId));
-  }
-
-  late final _$cancelMundialitoAsyncAction =
-      AsyncAction('_OverviewViewModelBase.cancelMundialito', context: context);
-
-  @override
-  Future<void> cancelMundialito(String mundialitoId) {
-    return _$cancelMundialitoAsyncAction
-        .run(() => super.cancelMundialito(mundialitoId));
-  }
-
   @override
   String toString() {
     return '''

@@ -57,20 +57,54 @@ mixin _$TournamentViewModel on _TournamentViewModelBase, Store {
     });
   }
 
-  late final _$mundialitoAtom =
-      Atom(name: '_TournamentViewModelBase.mundialito', context: context);
+  late final _$tournamentAtom =
+      Atom(name: '_TournamentViewModelBase.tournament', context: context);
 
   @override
-  Mundialito? get mundialito {
-    _$mundialitoAtom.reportRead();
-    return super.mundialito;
+  TournamentViewObject? get tournament {
+    _$tournamentAtom.reportRead();
+    return super.tournament;
   }
 
   @override
-  set mundialito(Mundialito? value) {
-    _$mundialitoAtom.reportWrite(value, super.mundialito, () {
-      super.mundialito = value;
+  set tournament(TournamentViewObject? value) {
+    _$tournamentAtom.reportWrite(value, super.tournament, () {
+      super.tournament = value;
     });
+  }
+
+  late final _$finishMundialitoAsyncAction = AsyncAction(
+      '_TournamentViewModelBase.finishMundialito',
+      context: context);
+
+  @override
+  Future<void> finishMundialito(String mundialitoId) {
+    return _$finishMundialitoAsyncAction
+        .run(() => super.finishMundialito(mundialitoId));
+  }
+
+  late final _$cancelMundialitoAsyncAction = AsyncAction(
+      '_TournamentViewModelBase.cancelMundialito',
+      context: context);
+
+  @override
+  Future<void> cancelMundialito(String mundialitoId) {
+    return _$cancelMundialitoAsyncAction
+        .run(() => super.cancelMundialito(mundialitoId));
+  }
+
+  late final _$_TournamentViewModelBaseActionController =
+      ActionController(name: '_TournamentViewModelBase', context: context);
+
+  @override
+  void setInitialRoute(String mundialitoId) {
+    final _$actionInfo = _$_TournamentViewModelBaseActionController.startAction(
+        name: '_TournamentViewModelBase.setInitialRoute');
+    try {
+      return super.setInitialRoute(mundialitoId);
+    } finally {
+      _$_TournamentViewModelBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
@@ -79,7 +113,7 @@ mixin _$TournamentViewModel on _TournamentViewModelBase, Store {
 isLoading: ${isLoading},
 isError: ${isError},
 currentIndex: ${currentIndex},
-mundialito: ${mundialito}
+tournament: ${tournament}
     ''';
   }
 }

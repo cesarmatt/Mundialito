@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mundialito/app/models/mundialito/overview/end/ended_mundialito_widget.dart';
@@ -31,18 +32,6 @@ class OverviewPageState extends State<OverviewPage> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          PopupMenuButton(
-              onSelected: _handleOptionMenuClick,
-              itemBuilder: (BuildContext context) {
-                return {'Finish', 'Cancel', 'Exit'}.map((option) {
-                  return PopupMenuItem(value: option, child: Text(option));
-                }).toList();
-              })
-        ],
-      ),
       body: Observer(builder: (_) {
         if (_viewModel.isLoading) {
           return const PrimaryLoaderWidget();
@@ -117,30 +106,4 @@ class OverviewPageState extends State<OverviewPage> {
     Modular.to.pushNamed('/tournament/endedresult/${widget.mundialitoId}');
   }
 
-  void _handleOptionMenuClick(String option) {
-    switch (option) {
-      case 'Finish':
-        _onFinishMundialitoPressed();
-        break;
-      case 'Cancel':
-        _onCancelMundialitoPressed();
-        break;
-      case 'Exit':
-        _onExitMundialitoPressed();
-    }
-  }
-
-  Future<void> _onFinishMundialitoPressed() async {
-    await _viewModel.finishMundialito(widget.mundialitoId);
-    Modular.to.pushNamed("/home");
-  }
-
-  Future<void> _onCancelMundialitoPressed() async {
-    await _viewModel.cancelMundialito(widget.mundialitoId);
-    Modular.to.pushNamed("/home");
-  }
-
-  Future<void> _onExitMundialitoPressed() async {
-    Modular.to.popAndPushNamed("/home");
-  }
 }

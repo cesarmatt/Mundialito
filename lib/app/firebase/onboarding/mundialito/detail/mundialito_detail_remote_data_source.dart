@@ -5,6 +5,7 @@ import 'package:mundialito/app/models/match/match.dart';
 import 'package:mundialito/app/models/match/match_firebase_object.dart';
 import 'package:mundialito/app/models/mundialito/mundialito.dart';
 import 'package:mundialito/app/models/mundialito/mundialito_firebase_object.dart';
+import 'package:mundialito/app/models/user/current_mundialito.dart';
 
 class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
   final _firebaseFirestoreMundialitoRef = FirebaseFirestore.instance
@@ -27,6 +28,7 @@ class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
         .doc(mundialitoId)
         .get();
     Mundialito mundialito = await _makeMundialito(snapshot);
+    _setCurrentMundialito(mundialito.joinCode);
     return mundialito;
   }
 
@@ -101,7 +103,9 @@ class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
         contenders: contenders,
         owner: mundialitoFirebase?.owner ?? "",
         matches: matches,
-        isCompleted: mundialitoFirebase?.isCompleted ?? false
+        isCompleted: mundialitoFirebase?.isCompleted ?? false,
+        joinCode: mundialitoFirebase?.joinCode ?? "",
+        joinedUsers: []
     );
   }
 
@@ -120,6 +124,10 @@ class MundialitoDetailRemoteDataSource implements MundialitoDetailService {
 
   Contender _makeContender(dynamic contender) {
     return Contender(name: contender);
+  }
+
+  void _setCurrentMundialito(String joinCode) {
+    CurrentMundialito(joinCode: joinCode);
   }
 
 }

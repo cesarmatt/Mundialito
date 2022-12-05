@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mundialito/app/modules/home/list/mundialito_home_list_item_widget.dart';
-import '../../../models/mundialito/mundialito_firebase_object.dart';
+import 'package:mundialito/app/models/mundialito/mundialito_firebase_object.dart';
+import 'package:mundialito/app/modules/home/widgets/list/mundialito_home_list_item_widget.dart';
 
 class MundialitoListWidget extends StatelessWidget {
   const MundialitoListWidget(

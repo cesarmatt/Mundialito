@@ -47,7 +47,7 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
                     Column(
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
                               "Let's configure",
@@ -56,7 +56,7 @@ class CreateMundialitoPageState extends State<CreateMundialitoPage> {
                           ],
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
                               "your ",

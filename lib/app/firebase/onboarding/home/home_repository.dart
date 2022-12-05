@@ -5,8 +5,13 @@ import 'package:mundialito/app/models/mundialito/mundialito_firebase_object.dart
 class HomeRepository {
   final HomeRemoteDataSource _remoteDataSource = HomeRemoteDataSource();
 
-  Future<List<MundialitoFirebaseObject>> getMundialitos() async {
-    var response = await _remoteDataSource.getMundialitos();
+  Future<List<MundialitoFirebaseObject>> getMyMundialitos() async {
+    var response = await _remoteDataSource.getMyMundialitos();
+    return response ?? [];
+  }
+
+  Future<List<MundialitoFirebaseObject>> getInvitedMundialitos() async {
+    var response = await _remoteDataSource.getInvitedMundialitos();
     return response ?? [];
   }
 }

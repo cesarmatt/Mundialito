@@ -13,17 +13,9 @@ class OverviewUseCase {
         mundialitoTile: mundialito?.name ?? "",
         mundialitoDate: mundialito?.startDate ?? Timestamp.now(),
         contenders: mundialito?.contenders ?? <Contender>[],
-        matches: mundialito?.matches ?? <Match>[]
+        matches: mundialito?.matches ?? <Match>[],
+        joinCode: mundialito?.joinCode ?? ""
     );
   }
 
-  Future<bool> finishMundialito(String mundialitoId) async {
-    var response = await _repository.finishMundialito(mundialitoId);
-    return response;
-  }
-
-  Future<bool> cancelMundialito(String mundialitoId) async {
-    var response = await _repository.cancelMundialito(mundialitoId);
-    return response;
-  }
 }

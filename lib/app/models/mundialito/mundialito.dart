@@ -6,11 +6,13 @@ class Mundialito {
   Mundialito(
       {required this.name,
       required this.startDate,
-      this.endDate,
       required this.contenders,
       required this.owner,
       required this.matches,
       required this.isCompleted,
+      required this.joinCode,
+      required this.joinedUsers,
+      this.endDate,
       this.uid});
 
   String? uid = "";
@@ -21,6 +23,8 @@ class Mundialito {
   String owner;
   List<Match> matches;
   bool isCompleted;
+  String joinCode;
+  List<String> joinedUsers;
 
   Mundialito.fromJson(Map<String, Object?> json)
       : this(
@@ -31,7 +35,9 @@ class Mundialito {
             contenders: json['contenders']! as List<Contender>,
             owner: json['owner']! as String,
             matches: json['matches']! as List<Match>,
-            isCompleted: json['isCompleted']! as bool);
+            isCompleted: json['isCompleted']! as bool,
+            joinCode: json['joinCode']! as String,
+            joinedUsers: json['joinedUsers']! as List<String>);
 
   Map<String, Object?> toJson() {
     return {
@@ -43,6 +49,8 @@ class Mundialito {
       'owner': owner,
       'matches': matches,
       'isCompleted': isCompleted,
+      'joinCode': joinCode,
+      'joinedUsers': joinedUsers
     };
   }
 }

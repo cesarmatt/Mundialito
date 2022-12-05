@@ -30,9 +30,6 @@ class MatchesPageState extends State<MatchesPage> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-      ),
       body: Observer(builder: (_) {
         if (viewModel.isLoading) {
           return const PrimaryLoaderWidget();

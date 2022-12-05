@@ -1,0 +1,1 @@
+enum RegisterStatus { weakPassword, existingEmail, success, failed, idle, loading }

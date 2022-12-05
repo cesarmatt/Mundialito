@@ -1,24 +1,25 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mundialito/app/models/onboarding/login/login_status.dart';
-import 'package:mundialito/app/modules/onboarding/submodules/login/login_view_model.dart';
+import 'package:mundialito/app/models/onboarding/register/register_status.dart';
+import 'package:mundialito/app/modules/onboarding/submodules/register/register_view_model.dart';
 import 'package:mundialito/app/shared/widgets/buttons/clickable_text_widget.dart';
 import 'package:mundialito/app/shared/widgets/buttons/primary_button_widget.dart';
 import 'package:mundialito/app/shared/widgets/input/input_text_password_widget.dart';
 import 'package:mundialito/app/shared/widgets/input/primary_text_input_widget.dart';
 import 'package:mundialito/app/shared/widgets/snackbar/snackbar_widget.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  LoginPageState createState() => LoginPageState();
+  RegisterPageState createState() => RegisterPageState();
 }
 
-class LoginPageState extends State<LoginPage> {
-  final LoginViewModel _viewModel = Modular.get();
+class RegisterPageState extends State<RegisterPage> {
+  final RegisterViewModel _viewModel = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class LoginPageState extends State<LoginPage> {
       appBar: AppBar(),
       bottomNavigationBar: PrimaryButtonWidget(
         onPressed: () {
-          _onSignInPressed();
+          _onRegisterPressed();
         },
         label: "Sign in",
         horizontalPadding: 16,
@@ -38,7 +39,7 @@ class LoginPageState extends State<LoginPage> {
           child: Observer(builder: (_) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Column(
                   children: [
@@ -46,19 +47,19 @@ class LoginPageState extends State<LoginPage> {
                       width: double.infinity,
                     ),
                     Text(
-                      "Hello again!",
+                      "Welcome!",
                       style: textTheme.headline1?.copyWith(),
                     ),
                     Column(
                       children: [
                         Text(
-                          "Is good to have you back!",
+                          "Register to start",
                           style: textTheme.headline5?.copyWith(),
                         ),
                         Text(
-                          " to have you back!",
+                          " using Mundialito.",
                           style: textTheme.headline5?.copyWith(),
-                        ),
+                        )
                       ],
                     )
                   ],
@@ -70,23 +71,15 @@ class LoginPageState extends State<LoginPage> {
                   children: [
                     PrimaryTextInputWidget(
                         inputTextEditingController:
-                            _viewModel.emailTextEditingController,
+                        _viewModel.emailTextEditingController,
                         hint: "Enter email"),
                     const SizedBox(
                       height: 16,
                     ),
                     InputTextPasswordWidget(
                         inputTextEditingController:
-                            _viewModel.passwordTextEditingController,
+                        _viewModel.passwordTextEditingController,
                         hint: "Password"),
-                    const SizedBox(
-                      height: 210,
-                    ),
-                    ClickableTextWidget(
-                        onTextClicked: () {
-                          _goToRegister();
-                        },
-                        text: "Register"),
                   ],
                 )
               ],
@@ -95,20 +88,22 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _onSignInPressed() async {
-    await _viewModel.doLogin();
+  void _onRegisterPressed() async {
+    await _viewModel.doRegister();
     _makeSnackBar();
   }
 
   void _makeSnackBar() async {
-    if (_viewModel.loginStatus == LoginStatus.success) {
+    if (_viewModel.registerStatus == RegisterStatus.success) {
       _goToHome();
-    } else if (_viewModel.loginStatus == LoginStatus.failed) {
+    } else if (_viewModel.registerStatus == RegisterStatus.failed) {
       await _showSnackBar(makeErrorSnackBar("Something went wrong."));
-    } else if (_viewModel.loginStatus == LoginStatus.wrongPassword) {
-      await _showSnackBar(makeErrorSnackBar("Your password seems wrong, please try again!"));
-    } else if (_viewModel.loginStatus == LoginStatus.noUser) {
-      await _showSnackBar(makeErrorSnackBar("Couldn't find your user, have you registered to Mundialito?"));
+    } else if (_viewModel.registerStatus == RegisterStatus.weakPassword) {
+      await _showSnackBar(
+          makeErrorSnackBar("Your password seems weak, please try again!"));
+    } else if (_viewModel.registerStatus == RegisterStatus.existingEmail) {
+      await _showSnackBar(makeErrorSnackBar(
+          "This email is already on use"));
     }
   }
 
@@ -118,9 +113,5 @@ class LoginPageState extends State<LoginPage> {
 
   void _goToHome() {
     Modular.to.navigate('/home/');
-  }
-
-  void _goToRegister() {
-    Modular.to.pushNamed('/register');
   }
 }

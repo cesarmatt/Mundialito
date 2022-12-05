@@ -28,7 +28,7 @@ class JoinMundialitoPageState extends State<JoinMundialitoPage> {
           },
           label: "Join mundialito!"),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Observer(builder: (_) {
           if (_viewModel.isLoading) {
             return const PrimaryLoaderWidget();

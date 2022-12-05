@@ -59,38 +59,6 @@ mixin _$CreateMundialitoViewModel on _CreateMundialitoViewModelBase, Store {
     });
   }
 
-  late final _$startDateAtom =
-      Atom(name: '_CreateMundialitoViewModelBase.startDate', context: context);
-
-  @override
-  DateTime? get startDate {
-    _$startDateAtom.reportRead();
-    return super.startDate;
-  }
-
-  @override
-  set startDate(DateTime? value) {
-    _$startDateAtom.reportWrite(value, super.startDate, () {
-      super.startDate = value;
-    });
-  }
-
-  late final _$endDateAtom =
-      Atom(name: '_CreateMundialitoViewModelBase.endDate', context: context);
-
-  @override
-  DateTime? get endDate {
-    _$endDateAtom.reportRead();
-    return super.endDate;
-  }
-
-  @override
-  set endDate(DateTime? value) {
-    _$endDateAtom.reportWrite(value, super.endDate, () {
-      super.endDate = value;
-    });
-  }
-
   late final _$errorAtom =
       Atom(name: '_CreateMundialitoViewModelBase.error', context: context);
 
@@ -165,36 +133,11 @@ mixin _$CreateMundialitoViewModel on _CreateMundialitoViewModelBase, Store {
   }
 
   @override
-  void onStartDateSelected(DateTime? selectedDate) {
-    final _$actionInfo =
-        _$_CreateMundialitoViewModelBaseActionController.startAction(
-            name: '_CreateMundialitoViewModelBase.onStartDateSelected');
-    try {
-      return super.onStartDateSelected(selectedDate);
-    } finally {
-      _$_CreateMundialitoViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void onEndDateSelected(DateTime? selectedDate) {
-    final _$actionInfo = _$_CreateMundialitoViewModelBaseActionController
-        .startAction(name: '_CreateMundialitoViewModelBase.onEndDateSelected');
-    try {
-      return super.onEndDateSelected(selectedDate);
-    } finally {
-      _$_CreateMundialitoViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 hasEndDate: ${hasEndDate},
 mundialitoEndDateToggle: ${mundialitoEndDateToggle},
 contendersList: ${contendersList},
-startDate: ${startDate},
-endDate: ${endDate},
 error: ${error},
 createdMundialitoId: ${createdMundialitoId}
     ''';

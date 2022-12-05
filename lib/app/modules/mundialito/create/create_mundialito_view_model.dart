@@ -22,8 +22,6 @@ class CreateMundialitoViewModel = _CreateMundialitoViewModelBase
 
 abstract class _CreateMundialitoViewModelBase with Store {
   final mundialitoNameTextEditingController = TextEditingController();
-  final mundialitoStartDateTextEditingController = TextEditingController();
-  final mundialitoEndDateTextEditingController = TextEditingController();
   final contenderNameTextEditingController = TextEditingController();
   final _createMundialitoRepository = CreateMundialitoRepository();
 
@@ -35,12 +33,6 @@ abstract class _CreateMundialitoViewModelBase with Store {
 
   @observable
   ObservableList<String> contendersList = ObservableList<String>.of([]);
-
-  @observable
-  DateTime? startDate;
-
-  @observable
-  DateTime? endDate;
 
   @observable
   bool error = false;
@@ -65,33 +57,6 @@ abstract class _CreateMundialitoViewModelBase with Store {
     contendersList.remove(toDeleteContender);
   }
 
-  @action
-  void onStartDateSelected(DateTime? selectedDate) {
-    if (selectedDate != null) {
-      startDate = selectedDate;
-      mundialitoStartDateTextEditingController.text =
-          DateTimeUtils.formatDDmmYY(selectedDate);
-    }
-  }
-
-  @action
-  void onEndDateSelected(DateTime? selectedDate) {
-    if (selectedDate != null) {
-      endDate = selectedDate;
-      mundialitoEndDateTextEditingController.text =
-          DateTimeUtils.formatDDmmYY(selectedDate);
-    }
-  }
-
-  bool mundialitoHasEndDate() {
-    if (mundialitoEndDateToggle[0] == true) {
-      mundialitoEndDateTextEditingController.text = "";
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   Future<void> onStartMundialitoClicked() async {
     var mundialito = makeMundialitoFromInput();
     if (mundialito != null) {
@@ -107,8 +72,6 @@ abstract class _CreateMundialitoViewModelBase with Store {
   MundialitoFirebaseObject? makeMundialitoFromInput() {
     String owner = CurrentUser.getCurrentUser().uid;
     MatchFactory matchFactory = MatchFactory();
-    Timestamp mundialitoStartDate =
-        Timestamp.fromDate(startDate ?? DateTime.now());
     var rawContendersList = <String>[];
     rawContendersList.addAll(contendersList);
     List<MatchFirebaseObject> matches =
@@ -116,7 +79,7 @@ abstract class _CreateMundialitoViewModelBase with Store {
     if (matches.isNotEmpty) {
       return MundialitoFirebaseObject(
           name: mundialitoNameTextEditingController.text,
-          startDate: mundialitoStartDate,
+          startDate: Timestamp.fromDate(DateTime.now()),
           contenders: contendersList,
           owner: owner,
           matches: matches,

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class InputTextPasswordWidget extends StatelessWidget {
+class InputTextPasswordWidget extends StatefulWidget {
+
   const InputTextPasswordWidget({
     Key? key,
     required this.inputTextEditingController,
@@ -14,8 +15,14 @@ class InputTextPasswordWidget extends StatelessWidget {
   final String? initialValue;
 
   @override
+  InputTextPasswordWidgetState createState() => InputTextPasswordWidgetState();
+}
+
+class InputTextPasswordWidgetState extends State<InputTextPasswordWidget> {
+  var showPassword = false;
+
+  @override
   Widget build(BuildContext context) {
-    var showPassword = false;
     var textTheme = Theme
         .of(context)
         .textTheme;
@@ -23,17 +30,19 @@ class InputTextPasswordWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          controller: inputTextEditingController,
-          initialValue: initialValue,
+          controller: widget.inputTextEditingController,
+          initialValue: widget.initialValue,
           style: textTheme.bodyText1?.copyWith(),
           maxLines: 1,
-          obscureText: showPassword,
+          obscureText: !showPassword,
           decoration: InputDecoration(
-            hintText: hint,
+            hintText: widget.hint,
             suffixIcon: IconButton(
-              icon: Icon(Icons.remove_red_eye),
+              icon: showPassword ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
               onPressed: () {
-                showPassword = !showPassword;
+                setState(() {
+                  showPassword = !showPassword;
+                });
               },
             )
           ),

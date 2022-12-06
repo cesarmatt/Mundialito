@@ -46,10 +46,6 @@ class RegisterPageState extends State<RegisterPage> {
                     const SizedBox(
                       width: double.infinity,
                     ),
-                    Text(
-                      "Welcome!",
-                      style: textTheme.headline1?.copyWith(),
-                    ),
                     Column(
                       children: [
                         Text(

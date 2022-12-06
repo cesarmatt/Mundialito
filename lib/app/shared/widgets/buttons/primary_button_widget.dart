@@ -10,7 +10,8 @@ class PrimaryButtonWidget extends StatelessWidget {
       this.width,
       this.height,
       this.horizontalPadding,
-      this.verticalPadding})
+      this.verticalPadding,
+      this.backgroundColor})
       : super(key: key);
 
   final void Function() onPressed;
@@ -19,6 +20,7 @@ class PrimaryButtonWidget extends StatelessWidget {
   final double? height;
   final double? horizontalPadding;
   final double? verticalPadding;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,9 @@ class PrimaryButtonWidget extends StatelessWidget {
             onPressed: onPressed,
             child: Text(
               label,
-              style: textTheme.button?.copyWith(),
+              style: textTheme.button?.copyWith(
+                  backgroundColor:
+                      backgroundColor ?? MundialitoTheme.getPrimaryColor()),
             )),
       ),
     );

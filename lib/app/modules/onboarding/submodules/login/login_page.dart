@@ -46,21 +46,9 @@ class LoginPageState extends State<LoginPage> {
                       width: double.infinity,
                     ),
                     Text(
-                      "Hello again!",
-                      style: textTheme.headline1?.copyWith(),
+                      "Is good to have you back!",
+                      style: textTheme.headline5?.copyWith(),
                     ),
-                    Column(
-                      children: [
-                        Text(
-                          "Is good to have you back!",
-                          style: textTheme.headline5?.copyWith(),
-                        ),
-                        Text(
-                          " to have you back!",
-                          style: textTheme.headline5?.copyWith(),
-                        ),
-                      ],
-                    )
                   ],
                 ),
                 const SizedBox(
@@ -80,7 +68,7 @@ class LoginPageState extends State<LoginPage> {
                             _viewModel.passwordTextEditingController,
                         hint: "Password"),
                     const SizedBox(
-                      height: 210,
+                      height: 280,
                     ),
                     ClickableTextWidget(
                         onTextClicked: () {
